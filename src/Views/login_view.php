@@ -7,7 +7,7 @@ function checkLoginErrors(){
         $errors = $_SESSION["errors_login"];
 
         foreach($errors as $error){
-            echo '<p class="login-errors">' . $error . '</p>';
+            echo '<p class="login-errors ">*' . $error . '</p>';
             // Log errors instead of displaying directly
             error_log($error);
         }   

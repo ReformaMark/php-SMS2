@@ -2,8 +2,15 @@
 
 declare(strict_types=1);
 
-function isEmpty(string $username, string $password){
-    if(empty($username) || empty($password)){
+function isUsernameEmpty(string $username){
+    if(empty($username)){
+        return true;
+    } else {
+        return false;
+    }
+}
+function isPasswordEmpty(string $password){
+    if(empty($password)){
         return true;
     } else {
         return false;

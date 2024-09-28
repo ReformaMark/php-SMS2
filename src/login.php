@@ -1,5 +1,6 @@
 <?php
 
+
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $username =  $_POST['username'];
@@ -14,20 +15,24 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         //ERROR  HANDLERS 
         $errors = [];
 
-        if(isEmpty($username, $password)){
-            $errors["empty_field"] = "Fill in all fields!"; 
+        if(isUsernameEmpty($username)){
+            $errors["empty_username"] = "Username is empty!"; 
         }
-
+        if(isPasswordEmpty($password)){
+            $errors["empty_field"] = "Password is empty!"; 
+        }
         $result = getUsername($pdo, $username);
 
-        if(!$result){
-            $errors["incorrect_credentials"] = "Username or password are incorrect!";
+        if(!isPasswordEmpty($password) && !isUsernameEmpty($username)){
+            if(!$result){
+                $errors["incorrect_credentials"] = "Username or password is incorrect!";
+            }
+            
+            if(isUsernameExist($result) && !isPasswordMatch($password, $result["password_hash"])){
+                $errors["incorrect_credentials"] = "Username or password is incorrect!";
+            }
         }
         
-        if(isUsernameExist($result) && !isPasswordMatch($password, $result["password_hash"])){
-            $errors["incorrect_credentials"] = "Username or password are incorrect!";
-        }
-
         require_once 'config_session.php';
 
         if($errors){
@@ -42,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         $_SESSION["last_regeneration"] = time();
 
-        header("Location: ../dashboard.php?login=success");
+        header("Location: ./layouts/dashboard.php?login=success");
 
         $pdo = null;
         $stmt = null;
