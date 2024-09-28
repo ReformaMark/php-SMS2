@@ -6,7 +6,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $username =  $_POST['username'];
     $password = $_POST['password'];
 
-    try{
+    try {
 
         require_once 'dbh.php';
         require_once 'Models/login_model.php';
@@ -18,20 +18,35 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         if(isUsernameEmpty($username)){
             $errors["empty_username"] = "Username is empty!"; 
         }
+
         if(isPasswordEmpty($password)){
             $errors["empty_field"] = "Password is empty!"; 
         }
+
+        // fetch username
         $result = getUsername($pdo, $username);
 
-        if(!isPasswordEmpty($password) && !isUsernameEmpty($username)){
-            if(!$result){
-                $errors["incorrect_credentials"] = "Username or password is incorrect!";
-            }
-            
-            if(isUsernameExist($result) && !isPasswordMatch($password, $result["password_hash"])){
-                $errors["incorrect_credentials"] = "Username or password is incorrect!";
-            }
+        // if username does not exist
+        if(!$result) {
+            $errors["incorrect_credentials"] = "Username or password is incorrect!";
         }
+
+        // if wrong password
+        if(!isPasswordMatch($password, $result["password_hash"])){
+            $errors["incorrect_credentials"] = "Username or password is incorrect!";
+        }
+
+        // $result = getUsername($pdo, $username);
+
+        // if(!isPasswordEmpty($password) && !isUsernameEmpty($username)){
+        //     if(!$result){
+        //         $errors["incorrect_credentials"] = "Username or password is incorrect!";
+        //     }
+            
+        //     if(isUsernameExist($pdo, $result) && !isPasswordMatch($password, $result["password_hash"])){
+        //         $errors["incorrect_credentials"] = "Username or password is incorrect!";
+        //     }
+        // }
         
         require_once 'config_session.php';
 

@@ -29,7 +29,7 @@
         
         <!--  Dashboard page -->
         <div class="bg-white m-5 w-full p-3 shadow-sm">
-            Dashboard page
+            Dashboard
         </div>
     </div>
 </body>

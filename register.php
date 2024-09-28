@@ -11,10 +11,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" 
-        content="width=device-width, initial-scale=1.0">
+            content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet" >
-    <link rel="stylesheet" href="./public/css/styles.css">
-    <title>Bestlink College</title> 
+    <link rel="stylesheet" href="public/css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Bestlink College</title>
+    <style>
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip-trigger:hover + .tooltip {
+            visibility: visible;
+            opacity: 1.0;
+        }
+    </style>
 </head>
 <body class="bg-gray-100/50 min-h-[80vh] flex flex-col justify-between">
     
@@ -29,10 +41,11 @@
             <h1 class="md:text-2xl sm:text-lg  font-medium font-serif">Student Management System 2</h1>
            
         </div>
-        <?php include('public/templates/login_form.php') ?>
+        <?php include('public/templates/register_form.php') ?>
     </div>
     <?php include('public/templates/footer.php') ?>
    
     <script src="./public/js/script.js"></script>
 </body>
 </html>
+

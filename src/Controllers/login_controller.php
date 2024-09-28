@@ -17,7 +17,9 @@ function isPasswordEmpty(string $password){
     }
 }
 
-function isUsernameExist(bool|array $result){
+function isUsernameExist(object $pdo, string $username){
+    $result = getUsername($pdo, $username);
+    
     if($result){
         return true;
     } else {
@@ -26,12 +28,7 @@ function isUsernameExist(bool|array $result){
 }
 
 function isPasswordMatch(string $password, string $password_hash){
-    // if(password_verify($password, $password_hash)){
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-    if($password === $password_hash){
+    if(password_verify($password, $password_hash)){
         return true;
     } else {
         return false;
