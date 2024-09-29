@@ -32,17 +32,10 @@
 
         <?php
             checkLoginErrors();
-
-            require_once "./src/config_session.php";
-
-            if(isset($_SESSION["register_success"]) && $_SESSION["register_success"] === true){
-                echo '<p class="login-success">Successfully registered!</p>';
-                unset($_SESSION["register_success"]);
-            }
         ?>
 
         <input disabled type="submit" id="loginSubmit" value="Login" name="submit" class="w-full mt-5 bg-[#d3d3d3] text-white hover:cursor-pointer py-2 hover:bg-blue-500/50 transition-colors duration-75 ease-linear rounded-md">
     </form>
 
-    <h1 class="text-center text-sm text-gray-500">Don't have an account? <a href="./register.php" class="text-blue-500">Register!</a></h1>
+    <h1 class="text-center text-sm text-gray-500">Don't have an account? <a href="./src/layouts/register.php" class="text-blue-500">Register!</a></h1>
 </section>
