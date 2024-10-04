@@ -33,7 +33,9 @@
 
     <?php 
         if(isset($_GET["register"]) && $_GET["register"] === "success"){
-            echo '<p class="bg-green-200 text-lg font-light text-white">Successfully registered!</p>';
+            echo '<p class="bg-green-300 p-3 rounded-md flex items-center justify-center gap-x-2 text-sm font-medium mb-6 w-full">
+                        Successfully registered!
+                  </p>';
             unset($_SESSION["register_success"]);
         }
     ?>
