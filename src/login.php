@@ -23,18 +23,32 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             $errors["empty_field"] = "Password is empty!"; 
         }
 
+        if(empty($errors)){
+            // fetch username
+            $result = getUsername($pdo, $username);
+
+            if($result === false || $result === null) {
+                $errors["incorrect_credentials"] = "Username or password is incorrect!";
+            } else {
+                if(!isPasswordMatch($password, $result["password_hash"])) {
+                    $errors["incorrect_credentials"] = "Username or password is incorrect!";
+                }
+            }
+        }
+
+
         // fetch username
-        $result = getUsername($pdo, $username);
+        // $result = getUsername($pdo, $username);
 
         // if username does not exist
-        if(!$result) {
-            $errors["incorrect_credentials"] = "Username or password is incorrect!";
-        }
+        // if(!$result) {
+            // $errors["incorrect_credentials"] = "Username or password is incorrect!";
+        // }
 
         // if wrong password
-        if(!isPasswordMatch($password, $result["password_hash"])){
-            $errors["incorrect_credentials"] = "Username or password is incorrect!";
-        }
+        // if(!isPasswordMatch($password, $result["password_hash"])){
+            // $errors["incorrect_credentials"] = "Username or password is incorrect!";
+        // }
 
         // $result = getUsername($pdo, $username);
 
