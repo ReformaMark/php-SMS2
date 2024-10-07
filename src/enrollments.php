@@ -12,8 +12,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     
     require_once "dbh.php";
     require_once "config_session.php";
-    require_once "Models/students_model.php";
-    require_once "Controllers/student_controller.php";
+    require_once "Models/enrollments_model.php";
+    require_once "Controllers/enrollments_controller.php";
     $errors = [];
 
     // all required

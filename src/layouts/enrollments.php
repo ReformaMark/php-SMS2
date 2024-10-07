@@ -47,7 +47,7 @@
                     </button>
                 </div>
                 <h1 class="text-lg font-semibold">Add New Students</h1>
-                <form id="studentForm" action="../students.php" onsubmit="" method="post" class="grid grid-cols-2 gap-5">
+                <form id="studentForm" action="../enrollments.php" onsubmit="" method="post" class="grid grid-cols-2 gap-5">
                     <div class="mb-4">
                         <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                         <input type="text" id="firstName" name="firstName" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" />
