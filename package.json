@@ -6,5 +6,8 @@
   },
   "scripts": {
     "build": "tailwindcss -i ./input.css -o output.css --watch"
-}
+  },
+  "dependencies": {
+    "chart.js": "^4.4.4"
+  }
 }

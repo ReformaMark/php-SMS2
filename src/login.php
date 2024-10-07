@@ -29,6 +29,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
             if($result === false || $result === null) {
                 $errors["incorrect_credentials"] = "Username or password is incorrect!";
+                echo $result;
             } else {
                 if(!isPasswordMatch($password, $result["password_hash"])) {
                     $errors["incorrect_credentials"] = "Username or password is incorrect!";
@@ -84,7 +85,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         die();
 
     } catch (PDOException $e){
-        die("Query failed: " . $e->getMessage());
+        error_log("Database error: " . $e->getMessage());
+        
+        $errors["db_error"] = "An error occurred. Please try again later.";
+        $_SESSION["errors_login"] = $errors;
+        header("Location: ../index.php");
+        die();
     }
 } else {
     header("Location: ../index.php");
