@@ -3,3 +3,13 @@
     color: red;
     font-weight: 700;
 }
+
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.tooltip-trigger:hover + .tooltip {
+    visibility: visible;
+    opacity: 1.0;
+}
