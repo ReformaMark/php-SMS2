@@ -1,5 +1,6 @@
 <?php
     require_once "../config_session.php";
+    require_once "../Models/students_model.php";
     if(!isset($_SESSION['user_id'])){
         header("Location: ../../index.php");
         die();
@@ -26,7 +27,7 @@
     ?>
     <div class="flex h-screen pt-20"> 
         <!-- sidebar -->
-        <?php  include('../../public/templates/sidebar.php');?>
+        <?php include('../../public/templates/sidebar.php');?>
         
         <!--  Dashboard page -->
         <main class="flex-1 p-8 overflow-y-auto">
@@ -49,7 +50,11 @@
                     </h3>
 
                     <p class="text-4xl font-bold text-blue-600">
-                        5,234
+                        <?php 
+                            require_once "../dbh.php";
+                            $totalUsers = getCountStudents($pdo);
+                            echo $totalUsers;
+                        ?>
                     </p>
                 </div>
 

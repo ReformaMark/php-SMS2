@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 function getAllStudents(PDO $pdo): ?array {
     try {
         $query = "SELECT * FROM students;";
@@ -39,5 +38,19 @@ function setStudent(object $pdo, string $firstName, string $lastName,string $gen
     } catch (PDOException $e) {
         // Handle exception (e.g., log the error, rethrow, or return a specific error message)
         throw new Exception("Error inserting student: " . $e->getMessage());
+    }
+}
+
+function getCountStudents(PDO $pdo) {
+    try {
+        $query = "SELECT COUNT(*) as total_users FROM students";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_users'];
+    } catch (PDOException $e) {
+        error_log("Error fetching total users: " . $e->getMessage());
+
+        return "N/A";
     }
 }
