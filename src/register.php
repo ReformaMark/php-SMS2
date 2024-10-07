@@ -19,7 +19,7 @@
         if(empty($username) || empty($password) || empty($cpassword)){
             $errors["empty_field"] = "All fields are required!";
         }
-        
+
         // check if the username is valid
         if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{4,}$/', $username)){
             $errors["username_invalid"] = "Username must contain both uppercase and lowercase letters, at least one number, no whitespace, and be at least 4 characters long!";
@@ -59,7 +59,7 @@
 
         createUser($pdo, $username, $password);
 
-        header("location: /layouts/register.php?register=success");
+        header("location: ./layouts/register.php?register=success");
         $pdo = null;
         $stmt = null;
 

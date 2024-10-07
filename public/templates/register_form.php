@@ -13,6 +13,10 @@
 
     <form action="../register.php" onsubmit="" method="post">
         <h1 class="md:text-3xl sm:text-2xl text-xl font-semibold text-center pt-3 sm:pt-0 mt-10 mb-5 sm:mt-0 sm:mb-10 border-t border-t-gray-300 sm:border-none ">Register</h1>
+
+        <?php
+            checkRegisterErrors();
+        ?>
         <?php 
             registerInputs();
             unset($_SESSION['register_data']);
@@ -24,19 +28,12 @@
             </label>
         </div>
 
-        <?php
-            checkRegisterErrors();
-        ?>
+       
 
         <input disabled type="submit" id="loginSubmit" value="Register" name="submit" class="w-full mt-5 bg-[#d3d3d3] text-white hover:cursor-pointer py-2 hover:bg-blue-500/50 transition-colors duration-75 ease-linear rounded-md">
     </form>
 
-    <?php 
-        if(isset($_GET["register"]) && $_GET["register"] === "success"){
-            echo '<p class="bg-green-200 text-lg font-light text-white">Successfully registered!</p>';
-            unset($_SESSION["register_success"]);
-        }
-    ?>
+
     <h1 class="text-center text-sm text-gray-500">Already have an account? <a href="../../index.php" class="text-blue-500">Login!</a></h1>
 </section>
 
