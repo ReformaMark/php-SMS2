@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $pdo = null;
     $stmt = null;
 
-    header("Location: ./layouts/students.php");
+    header("Location: ./layouts/enrollments.php");
 
     die();
 

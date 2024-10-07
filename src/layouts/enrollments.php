@@ -6,11 +6,11 @@
         die();
     }
 
-    require_once "../Models/students_model.php";
-    require_once "../Models/students_model.php";
-    require_once "../Views/student_view.php";
+    require_once "../Models/enrollments_model.php";
+    require_once "../Models/enrollments_model.php";
+    require_once "../Views/enrollments_view.php";
 
-    require_once "../students.php";
+    require_once "../enrollments.php";
 
 
 ?>
@@ -20,7 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
+    <title>Enrollments</title>
     <link href="../../output.css" rel="stylesheet" >
     <link rel="stylesheet" href="../../public/css/styles.css">
 </head>
@@ -87,22 +87,24 @@
 
             <h1 class="text-lg font-semibold">Student lists</h1>
             <table class="w-full shadow-lg border-collapse">
-                <tr class="w-full border border-gray-400 bg-gray-100 even:bg-gray-100">
-                    <th class="border border-gray-400">Id</th>
-                    <th class="border border-gray-400">Full Name</th>
-                    <th class="border border-gray-400">Email</th>
-                    <th class="border border-gray-400">Phone No.</th>
-                    <th class="border border-gray-400">Enrollment Date</th>
-                    <th class="border border-gray-400">Status</th>
-                </tr>
-
-                <?php  
-                    require_once '../dbh.php';
-                    $students = fetchAllStudents($pdo);
-                    displayStudents($students);
-                 
-                ?>
-            </table>
+                <thead>
+                    <tr class="w-full border border-gray-400 bg-gray-100 even:bg-gray-100">
+                        <th class="border border-gray-400">Id</th>
+                        <th class="border border-gray-400">Full Name</th>
+                        <th class="border border-gray-400">Email</th>
+                        <th class="border border-gray-400">Phone No.</th>
+                        <th class="border border-gray-400">Enrollment Date</th>
+                        <th class="border border-gray-400">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php  
+                        require_once '../dbh.php';
+                        $students = fetchAllStudents($pdo);
+                        displayStudents($students);
+                    
+                    ?>
+                </tbody>
         </div>
     </div>
 
