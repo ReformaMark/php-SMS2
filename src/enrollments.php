@@ -12,8 +12,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     
     require_once "dbh.php";
     require_once "config_session.php";
-    require_once "Models/students_model.php";
-    require_once "Controllers/student_controller.php";
+    require_once "./Models/enrollments_model.php";
+    require_once "Controllers/enrollments_controller.php";
     $errors = [];
 
     // all required
@@ -31,18 +31,16 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 };
 
-function fetchAllStudents(object $pdo){
+function fetchAllStudents(object $pdo, string|null $filter, int $offset, int $total_records_per_page){
     try{
       
-        $students = getAllStudents($pdo); 
+        $students = getAllStudents($pdo,$filter,$offset,$total_records_per_page); 
 
         if($students !== null){
             return $students;
         } else {
             return null;
         }
-
-        return $students;
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     };

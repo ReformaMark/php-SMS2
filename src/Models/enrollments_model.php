@@ -2,14 +2,41 @@
 
 declare(strict_types=1);
 
-function getAllStudents(PDO $pdo): ?array {
+function getAllStudents(PDO $pdo, ?string $filter, int $offset, int $total_records_per_page): ?array {
     try {
-        $query = "SELECT * FROM students;";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute();
+        if ($filter === "" || $filter === null) {
+            $query = "SELECT * FROM students ORDER BY student_id DESC LIMIT :offset, :total_records_per_page;";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindParam(':total_records_per_page', $total_records_per_page, PDO::PARAM_INT);
+            $stmt->execute();
+        } else {
+            $query = "SELECT * FROM students WHERE CONCAT(student_id, first_name, last_name, email) LIKE :filter ORDER BY student_id DESC;";
+            $stmt = $pdo->prepare($query);
+            $filter = "%$filter%";
+            $stmt->bindParam(':filter', $filter, PDO::PARAM_STR);
+            $stmt->execute();
+        }
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    } catch (PDOException $e) {
+        // Handle the exception, log or return appropriate response
+        return null;
+    }
+}
+
+function getTotalCount(PDO $pdo): ?int {
+    try {
+        $query = "SELECT COUNT(*) as total_records FROM students;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as a single row
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Return the count as an integer
+        return $result ? (int)$result['total_records'] : null;
     } catch (PDOException $e) {
         // Handle the exception, log or return appropriate response
         return null;
