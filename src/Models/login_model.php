@@ -10,9 +10,11 @@ function getUsername (object $pdo, string $username) {
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        return $result !== false ? $result : false;
     } catch (PDOException $e) {
-        // Handle the exception, log or return appropriate response
-        return null;
+        
+        error_log("Database error in getUsername: " . $e->getMessage());
+
+        return false;
     }
 }
