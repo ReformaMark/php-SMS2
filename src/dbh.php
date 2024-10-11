@@ -1,8 +1,8 @@
 <?php
 
 $host = "localhost";
-$dbName = "sms-mis";
-$dbUsername = "root";
+$dbName = "mis_sms";
+$dbUsername = "misschoo@localhost";
 $dbPassword= "";
 
 try {
