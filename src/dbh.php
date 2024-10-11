@@ -1,6 +1,6 @@
 <?php
 
-$host = "localhost";
+$host = "157.173.111.118";
 $dbName = "mis_sms";
 $dbUsername = "misschoo@localhost";
 $dbPassword= "";
