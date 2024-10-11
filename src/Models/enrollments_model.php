@@ -43,8 +43,14 @@ function getTotalCount(PDO $pdo): ?int {
     }
 }
 
-function setStudent(object $pdo, string $firstName, string $lastName,string $gender, string $birthDate, string $email, string $phoneNumber, string $enrollmentDate, string $status) {
+function setStudent(object $pdo, string $firstName, string $lastName,string $birthDate, string $gender, string $email, string $phoneNumber, string $enrollmentDate, string $status) {
     try {
+
+        $date = date('Y-m-d', strtotime($birthDate));
+        if($date === false) {
+            throw new Exception("Invalid date format. Please use the format YYYY-MM-DD.");
+        }
+
         $query = "INSERT INTO students (first_name, last_name, date_of_birth, gender, email, phone_number, enrollment_date, status) 
                   VALUES (:firstName, :lastName,:birthDate ,:gender ,:email, :phoneNumber, :enrollmentDate, :status)";
         

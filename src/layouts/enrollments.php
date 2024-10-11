@@ -65,8 +65,11 @@
                         <input type="tel" id="phoneNumber" name="phoneNumber" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" />
                     </div>
                     <div class="mb-4">
-                        <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                        <input type="date" id="birthDate" name="birthDate" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" />
+                        <label for="birthDate" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                        <input  type="date" id="birthDate" name="birthDate" required 
+                                pattern="\d{4}-\d{2}-\d{2}"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" 
+                        />
                     </div>
                     <div class="mb-4">
                         <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
