@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 24, 2024 at 02:28 PM
+-- Generation Time: Oct 24, 2024 at 09:27 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -224,14 +224,15 @@ CREATE TABLE IF NOT EXISTS `students` (
   `status` enum('Active','Inactive','Graduated','On Leave') COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`student_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`student_id`, `first_name`, `last_name`, `date_of_birth`, `created_at`, `gender`, `email`, `phone_number`, `address`, `enrollment_date`, `status`) VALUES
-(1, 'John', 'Wick', '0000-00-00', '2024-10-11 06:45:10', '', 'john.wick.babayaga1@gmail.com', '09273658381', NULL, '2023-11-16', 'Active');
+(1, 'John', 'Wick', '0000-00-00', '2024-10-11 06:45:10', '', 'john.wick.babayaga1@gmail.com', '09273658381', NULL, '2023-11-16', 'Active'),
+(2, 'dasdasnion', 'nidosandoias', '2001-02-02', '2024-10-24 15:56:05', 'Male', 'ndsioandioas@gmail.com', '09173636251', NULL, '2024-10-18', 'Active');
 
 -- --------------------------------------------------------
 
@@ -252,22 +253,27 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `enrollment_date` date DEFAULT NULL,
   `password_hash` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `role` enum('Admin','Faculty','Student','Staff') COLLATE utf8mb4_general_ci NOT NULL,
+  `role` enum('Admin','Faculty','Student','Staff') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Student',
   `email` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `status` enum('Active','Inactive','Graduated','On Leave') COLLATE utf8mb4_general_ci NOT NULL,
   `last_login` datetime DEFAULT NULL,
+  `is_archived` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `date_of_birth`, `created_at`, `gender`, `phone_number`, `address`, `enrollment_date`, `password_hash`, `role`, `email`, `status`, `last_login`) VALUES
-(1, 'mirchea', NULL, NULL, NULL, '2024-10-24 14:23:55', NULL, NULL, NULL, NULL, '$2y$12$OFvwocqb4DyvVo1G3ovW9..Y4ehDMKvYaAbffK8kNqp9RHgoNSxKO', 'Admin', NULL, 'Active', NULL),
-(2, 'student1', NULL, NULL, NULL, '2024-10-24 14:23:55', NULL, NULL, NULL, NULL, '$2y$12$XWKf5ywjAvvYTBgftKrIj.yVuRjviZqQC4fDUyhiRdU2yASiqV9WW', 'Student', NULL, 'Active', NULL);
+INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `date_of_birth`, `created_at`, `gender`, `phone_number`, `address`, `enrollment_date`, `password_hash`, `role`, `email`, `status`, `last_login`, `is_archived`) VALUES
+(1, 'mirchea', 'System', 'Admin', NULL, '2024-10-24 14:23:55', NULL, NULL, NULL, NULL, '$2y$12$OFvwocqb4DyvVo1G3ovW9..Y4ehDMKvYaAbffK8kNqp9RHgoNSxKO', 'Admin', NULL, 'Active', NULL, 0),
+(2, 's21015551', 'Darryl', 'Panis', '2001-11-22', '2024-10-24 14:23:55', 'Male', '09179615821', 'Blk 69 Lot 420 Street Streetan Q.C', NULL, '$2y$12$XWKf5ywjAvvYTBgftKrIj.yVuRjviZqQC4fDUyhiRdU2yASiqV9WW', 'Student', 'darrylpaniss@gmail.com', 'Active', NULL, 0),
+(3, 's21015552', 'Fernan', 'Manaog', '2001-11-20', '2024-10-24 15:24:34', 'Male', '09179615821', 'street streetan', NULL, '$2y$12$3F98XwYguVD.8Nmrbtl1gu6bxDUJtCWH5uGs.TPz3Os0SwgyjGoD6', 'Student', 'fernan.manaog.123@gmail.com', 'Active', NULL, 0),
+(4, 'test1', NULL, NULL, NULL, '2024-10-24 19:47:09', NULL, NULL, NULL, NULL, '$2y$12$QPEVIjs7HQ6mFwGSrHVtP.RzzHeRCqEzv7PGKKIIyIOSWIITNYlKm', 'Admin', NULL, 'Active', NULL, 0),
+(5, 's21015553', NULL, NULL, NULL, '2024-10-24 19:50:12', NULL, NULL, NULL, NULL, '$2y$12$KT38Jy2JHLr76rSAWY/sSe2Axx5hdkpqawa8tcPntlry93x2wWQyu', 'Student', NULL, 'Active', NULL, 0),
+(6, 's21015554', NULL, NULL, NULL, '2024-10-24 19:50:25', NULL, NULL, NULL, NULL, '$2y$12$uFpQqZGhwyoXGrAlr6hRV.tWmNG/9bW09yev0YF.G6etdGWE8sShW', 'Student', NULL, 'Active', NULL, 0);
 
 --
 -- Constraints for dumped tables
