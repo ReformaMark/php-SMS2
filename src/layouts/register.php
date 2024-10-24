@@ -42,6 +42,7 @@
             <h1 class="md:text-2xl sm:text-lg  font-medium font-serif">Student Management System 2</h1>
            
         </div>
+        
         <?php include('../../public/templates/register_form.php') ?>
     </div>
     <?php include('../../public/templates/footer.php') ?>

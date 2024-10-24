@@ -26,7 +26,7 @@ function setUser (object $pdo, string $username, string $password_hash) {
     $options = [
         'cost' => 12
     ];
-
+ 
     $hashed_password = password_hash($password_hash, PASSWORD_BCRYPT, $options);
     $stmt->bindParam(":username", $username);
     $stmt->bindParam(":password_hash", $hashed_password);

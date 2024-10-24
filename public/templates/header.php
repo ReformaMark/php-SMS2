@@ -15,7 +15,7 @@
     <?php 
         if(isset($_SESSION['user_username'])){
             include($_SERVER['DOCUMENT_ROOT'] . '/php-SMS2/public/templates/userAvatar.php');
-        } else{
+        } else {
             echo '<ul class="hidden md:flex justify-center gap-10">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>

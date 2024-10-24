@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIS Staff Dashboard</title>
+    <title>MIS Dashboard</title>
     <link href="../../output.css" rel="stylesheet" >
     <link rel="stylesheet" href="../../public/css/styles.css">
     <script src="../../node_modules/chart.js/dist/chart.umd.js"></script>
@@ -33,7 +33,7 @@
         <main class="flex-1 p-8 overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-semibold text-blue-800">
-                    MIS Staff Dashboard
+                    MIS Dashboard
                 </h2>
                 <div class="flex items-center">
                     <div class="relative mr-4">

@@ -5,6 +5,7 @@
 
 <section class="w-full sm:w-1/3 md:w-1/2 bg-white p-10 rounded-lg outline-1 outline-gray-100 shadow-xl">
     <div class="block sm:hidden text-center">
+    
         <h1 class="md:text-4xl sm:text-3xl text-2xl font-semibold font-serif">Welcome to Bestlink College</h1>
         <h1 class="md:text-4xl sm:text-3xl text-2xl font-semibold font-serif">of the Philippines</h1>
         <h1 class="md:text-xl sm:text-lg text-sm font-medium font-serif">Student Management System 2</h1>

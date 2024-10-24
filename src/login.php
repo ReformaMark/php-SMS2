@@ -41,6 +41,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     $_SESSION['user_id'] = $result['user_id'];
                     $_SESSION['user_username'] = htmlspecialchars($result['username']);
                     $_SESSION['user_role'] = $result['role'];
+                    $_SESSION['user_name'] = htmlspecialchars($result['first_name']); // Store first name in session
+                    $_SESSION['user_lastname'] = htmlspecialchars($result['last_name']);
 
                     $_SESSION["last_regeneration"] = time();
 
@@ -57,32 +59,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             }
         }
 
-
-        // fetch username
-        // $result = getUsername($pdo, $username);
-
-        // if username does not exist
-        // if(!$result) {
-            // $errors["incorrect_credentials"] = "Username or password is incorrect!";
-        // }
-
-        // if wrong password
-        // if(!isPasswordMatch($password, $result["password_hash"])){
-            // $errors["incorrect_credentials"] = "Username or password is incorrect!";
-        // }
-
-        // $result = getUsername($pdo, $username);
-
-        // if(!isPasswordEmpty($password) && !isUsernameEmpty($username)){
-        //     if(!$result){
-        //         $errors["incorrect_credentials"] = "Username or password is incorrect!";
-        //     }
-            
-        //     if(isUsernameExist($pdo, $result) && !isPasswordMatch($password, $result["password_hash"])){
-        //         $errors["incorrect_credentials"] = "Username or password is incorrect!";
-        //     }
-        // }
-        
         require_once 'config_session.php';
 
         if($errors){

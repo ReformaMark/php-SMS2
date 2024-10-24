@@ -121,7 +121,7 @@
 
             unset($_SESSION["errors_register"]);
         } else if(isset($_GET['register']) && $_GET['register'] === 'success'){
-            echo '<p class="text-gray-500  text-center border-l-4 py-1 bg-green-200 border-l-green-500"> Registered succussfully!</p>';
+            echo '<p class="text-white  text-center border-l-4 py-1 bg-green-500 border-l-green-500 mb-3 rounded-md"> Registered Successfully!</p>';
 
           
         }

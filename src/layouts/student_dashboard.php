@@ -5,6 +5,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'Student') {
     die();
 }
 
+// Fetch the student's name from the session
+$studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student';
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +34,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'Student') {
         <main class="flex-1 p-8 overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-semibold text-blue-800">
-                    MIS Staff Dashboard
+                    Welcome, <?php echo $studentName; ?>!
                 </h2>
                 <div class="flex items-center">
                     <div class="relative mr-4">
