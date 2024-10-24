@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 24, 2024 at 09:27 PM
+-- Generation Time: Oct 24, 2024 at 11:14 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -261,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -271,9 +271,11 @@ INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `date_of_
 (1, 'mirchea', 'System', 'Admin', NULL, '2024-10-24 14:23:55', NULL, NULL, NULL, NULL, '$2y$12$OFvwocqb4DyvVo1G3ovW9..Y4ehDMKvYaAbffK8kNqp9RHgoNSxKO', 'Admin', NULL, 'Active', NULL, 0),
 (2, 's21015551', 'Darryl', 'Panis', '2001-11-22', '2024-10-24 14:23:55', 'Male', '09179615821', 'Blk 69 Lot 420 Street Streetan Q.C', NULL, '$2y$12$XWKf5ywjAvvYTBgftKrIj.yVuRjviZqQC4fDUyhiRdU2yASiqV9WW', 'Student', 'darrylpaniss@gmail.com', 'Active', NULL, 0),
 (3, 's21015552', 'Fernan', 'Manaog', '2001-11-20', '2024-10-24 15:24:34', 'Male', '09179615821', 'street streetan', NULL, '$2y$12$3F98XwYguVD.8Nmrbtl1gu6bxDUJtCWH5uGs.TPz3Os0SwgyjGoD6', 'Student', 'fernan.manaog.123@gmail.com', 'Active', NULL, 0),
-(4, 'test1', NULL, NULL, NULL, '2024-10-24 19:47:09', NULL, NULL, NULL, NULL, '$2y$12$QPEVIjs7HQ6mFwGSrHVtP.RzzHeRCqEzv7PGKKIIyIOSWIITNYlKm', 'Admin', NULL, 'Active', NULL, 0),
-(5, 's21015553', NULL, NULL, NULL, '2024-10-24 19:50:12', NULL, NULL, NULL, NULL, '$2y$12$KT38Jy2JHLr76rSAWY/sSe2Axx5hdkpqawa8tcPntlry93x2wWQyu', 'Student', NULL, 'Active', NULL, 0),
-(6, 's21015554', NULL, NULL, NULL, '2024-10-24 19:50:25', NULL, NULL, NULL, NULL, '$2y$12$uFpQqZGhwyoXGrAlr6hRV.tWmNG/9bW09yev0YF.G6etdGWE8sShW', 'Student', NULL, 'Active', NULL, 0);
+(4, 'test1', 'Duke', 'Dennis', NULL, '2024-10-24 19:47:09', NULL, NULL, NULL, NULL, '$2y$12$QPEVIjs7HQ6mFwGSrHVtP.RzzHeRCqEzv7PGKKIIyIOSWIITNYlKm', 'Admin', NULL, 'Active', NULL, 0),
+(5, 's21015553', 'Joshua', 'Cillo', NULL, '2024-10-24 19:50:12', NULL, NULL, NULL, NULL, '$2y$12$KT38Jy2JHLr76rSAWY/sSe2Axx5hdkpqawa8tcPntlry93x2wWQyu', 'Student', NULL, 'Active', NULL, 1),
+(6, 's21015554', 'Jose', 'Mainipin', NULL, '2024-10-24 19:50:25', NULL, NULL, NULL, NULL, '$2y$12$uFpQqZGhwyoXGrAlr6hRV.tWmNG/9bW09yev0YF.G6etdGWE8sShW', 'Student', NULL, 'Active', NULL, 0),
+(7, 's2021212', NULL, NULL, NULL, '2024-10-24 22:37:41', NULL, NULL, NULL, NULL, '$2y$12$GPDB9U.HfPIVOKidgcm6ie9r9e9aI26Q0z4lZrKBp2v7joeUx774a', 'Student', NULL, 'Active', NULL, 0),
+(8, 's21015541', 'Hans', 'Rivas', '2001-11-22', '2024-10-24 22:45:49', 'Male', '09179615929', 'Blk 56, Lot 7, Corianna, Bulacan City', NULL, '$2y$12$2VFZxDUvQ2PBJkg84rjBfu.2jXQPLPEZPokTxxFLwYxNQo.0YwwqK', 'Student', 'hans.rivas.333@gmail.com', 'Active', NULL, 0);
 
 --
 -- Constraints for dumped tables
