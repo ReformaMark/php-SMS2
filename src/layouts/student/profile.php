@@ -58,20 +58,22 @@ foreach ($required_fields as $field) {
             <?php endif; ?>
 
             <!-- Profile information -->
-            <div class="bg-white rounded-lg shadow p-6 relative">
+            <div class="bg-white rounded-lg shadow p-4 sm:p-6 relative">
                 <h3 class="text-xl font-semibold text-blue-800 mb-4">Personal Information</h3>
                 <?php if ($student): ?>
-                    <p><strong>Name:</strong> <?php echo htmlspecialchars($student['first_name'] ?? '') . ' ' . htmlspecialchars($student['last_name'] ?? ''); ?></p>
-                    <p><strong>Student ID:</strong> <?php echo htmlspecialchars($student['user_id'] ?? ''); ?></p>
-                    <p><strong>Email:</strong> <?php echo htmlspecialchars($student['email'] ?? ''); ?></p>
-                    <p><strong>Phone:</strong> <?php echo htmlspecialchars($student['phone_number'] ?? ''); ?></p>
-                    <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($student['date_of_birth'] ?? ''); ?></p>
-                    <p><strong>Gender:</strong> <?php echo htmlspecialchars($student['gender'] ?? ''); ?></p>
-                    <p><strong>Address:</strong> <?php echo htmlspecialchars($student['address'] ?? ''); ?></p>
-                    <p><strong>Enrollment Date:</strong> <?php echo htmlspecialchars($student['enrollment_date'] ?? ''); ?></p>
-                    <p><strong>Status:</strong> <?php echo htmlspecialchars($student['status'] ?? ''); ?></p>
-                    <div class="absolute top-6 right-6">
-                        <button id="updateProfileBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <p><strong class="font-medium">Name:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['first_name'] ?? '') . ' ' . htmlspecialchars($student['last_name'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Student ID:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['user_id'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Email:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['email'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Phone:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['phone_number'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Date of Birth:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['date_of_birth'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Gender:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['gender'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Address:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['address'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Enrollment Date:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['enrollment_date'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Status:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['status'] ?? ''); ?></span></p>
+                    </div>
+                    <div class="mt-6 sm:absolute sm:top-6 sm:right-6">
+                        <button id="updateProfileBtn" class="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Update Profile
                         </button>
                     </div>
@@ -99,7 +101,6 @@ foreach ($required_fields as $field) {
                             <option value="">Select Gender</option>
                             <option value="Male" <?php echo ($student['gender'] ?? '') === 'Male' ? 'selected' : ''; ?>>Male</option>
                             <option value="Female" <?php echo ($student['gender'] ?? '') === 'Female' ? 'selected' : ''; ?>>Female</option>
-                            <option value="Other" <?php echo ($student['gender'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other</option>
                         </select>
 
                         <textarea name="address" placeholder="Address" class="mb-2 w-full px-3 py-2 border rounded-lg" required><?php echo htmlspecialchars($student['address'] ?? ''); ?></textarea>

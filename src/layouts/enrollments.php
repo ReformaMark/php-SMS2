@@ -48,41 +48,41 @@
         include('../../public/templates/header.php');
        
     ?>
-      <div class="flex pt-20"> 
+      <div class="flex flex-col lg:flex-row pt-20"> 
          <!-- sidebar -->
         <?php include('../../public/templates/sidebar.php');?>
 
         <!-- Student page -->
-        <div class="bg-white m-5 w-full p-3">
+        <div class="bg-white m-2 lg:m-5 w-full p-3">
             <!-- Tabs -->
             <div class="flex mb-5">
-                <button class="tab active px-4 py-2 bg-blue-500 text-white rounded-t-lg">Active Students</button>
-                <button class="tab px-4 py-2 bg-gray-200 text-gray-700 rounded-t-lg">Archived Students</button>
+                <button class="tab active px-2 py-1 lg:px-4 lg:py-2 bg-blue-500 text-white rounded-t-lg text-sm lg:text-base">Active Students</button>
+                <button class="tab px-2 py-1 lg:px-4 lg:py-2 bg-gray-200 text-gray-700 rounded-t-lg text-sm lg:text-base">Archived Students</button>
             </div>
 
             <!-- Search Form -->
-            <form action="" method="get" class="grid grid-cols-12 items-center mb-5">
-                <h1 class="text-lg font-semibold col-span-9">Student lists</h1>
-                <div class="flex justify-end items-center gap-x-5 col-span-3">
-                    <input type="text" placeholder="Search name, id, email" id="search" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" class="mt-1 block h-10 py-1 px-2 border bg-gray-50 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" />
-                    <button type="submit" class='px-2 py-1 bg-blue-700 rounded-lg text-white hover:bg-blue-500'>Search</button>
+            <form action="" method="get" class="grid grid-cols-1 lg:grid-cols-12 items-center mb-5">
+                <h1 class="text-lg font-semibold col-span-1 lg:col-span-9 mb-2 lg:mb-0">Student lists</h1>
+                <div class="flex flex-col lg:flex-row justify-end items-center gap-y-2 lg:gap-x-5 col-span-1 lg:col-span-3">
+                    <input type="text" placeholder="Search name, id, email" id="search" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" class="w-full lg:w-auto mt-1 block h-10 py-1 px-2 border bg-gray-50 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" />
+                    <button type="submit" class='w-full lg:w-auto px-2 py-1 bg-blue-700 rounded-lg text-white hover:bg-blue-500'>Search</button>
                 </div>
             </form>
 
             <!-- Active Students -->
-            <div class="tab-content">
+            <div class="tab-content overflow-x-auto">
                 <?php
                     $students = getStudents($pdo, false, $filter, $offset, $total_records_per_page);
                     if ($students) {
                         echo '<table class="w-full shadow-lg border-collapse m-h-[50vh]">';
-                        echo '<thead><tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">';
-                        echo '<th class="py-3 px-6 text-center">Student ID</th>';
-                        echo '<th class="py-3 px-6 text-center">Full Name</th>';
-                        echo '<th class="py-3 px-6 text-center">Email</th>';
-                        echo '<th class="py-3 px-6 text-center">Phone No.</th>';
-                        echo '<th class="py-3 px-6 text-center">Enrollment Date</th>';
-                        echo '<th class="py-3 px-6 text-center">Status</th>';
-                        echo '<th class="py-3 px-6 text-center">Actions</th>';
+                        echo '<thead><tr class="bg-gray-200 text-gray-600 uppercase text-xs lg:text-sm leading-normal">';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Student ID</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Full Name</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Email</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Status</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Actions</th>';
                         echo '</tr></thead><tbody>';
                         displayStudents($students);
                         echo '</tbody></table>';
@@ -93,33 +93,33 @@
                 <!-- Pagination -->
                 <div class="flex justify-center mt-4 space-x-1">
                     <?php if ($page_no > 1): ?>
-                        <a href="?page_no=<?php echo $prev_page; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Prev</a>
+                        <a href="?page_no=<?php echo $prev_page; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Prev</a>
                     <?php endif; ?>
 
                     <?php for ($counter = 1; $counter <= $total_number_of_pages; $counter++): ?>
-                        <a href="?page_no=<?php echo $counter; ?>" class="px-3 py-1 <?php echo $counter == $page_no ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white"><?php echo $counter; ?></a>
+                        <a href="?page_no=<?php echo $counter; ?>" class="px-2 py-1 lg:px-3 lg:py-1 <?php echo $counter == $page_no ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base"><?php echo $counter; ?></a>
                     <?php endfor; ?>
 
                     <?php if ($page_no < $total_number_of_pages): ?>
-                        <a href="?page_no=<?php echo $next_page; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Next</a>
+                        <a href="?page_no=<?php echo $next_page; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Next</a>
                     <?php endif; ?>
                 </div>
             </div>
 
             <!-- Archived Students -->
-            <div class="tab-content hidden">
+            <div class="tab-content hidden overflow-x-auto">
                 <?php
                     $students = getStudents($pdo, true, $filter, $offset, $total_records_per_page);
                     if ($students) {
                         echo '<table class="w-full shadow-lg border-collapse m-h-[50vh]">';
-                        echo '<thead><tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">';
-                        echo '<th class="py-3 px-6 text-center">Student ID</th>';
-                        echo '<th class="py-3 px-6 text-center">Full Name</th>';
-                        echo '<th class="py-3 px-6 text-center">Email</th>';
-                        echo '<th class="py-3 px-6 text-center">Phone No.</th>';
-                        echo '<th class="py-3 px-6 text-center">Enrollment Date</th>';
-                        echo '<th class="py-3 px-6 text-center">Status</th>';
-                        echo '<th class="py-3 px-6 text-center">Actions</th>';
+                        echo '<thead><tr class="bg-gray-200 text-gray-600 uppercase text-xs lg:text-sm leading-normal">';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Student ID</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Full Name</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Email</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Status</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Actions</th>';
                         echo '</tr></thead><tbody>';
                         displayStudents($students);
                         echo '</tbody></table>';
@@ -130,15 +130,15 @@
                 <!-- Pagination -->
                 <div class="flex justify-center mt-4 space-x-1">
                     <?php if ($page_no > 1): ?>
-                        <a href="?page_no=<?php echo $prev_page; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Prev</a>
+                        <a href="?page_no=<?php echo $prev_page; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Prev</a>
                     <?php endif; ?>
 
                     <?php for ($counter = 1; $counter <= $total_number_of_pages; $counter++): ?>
-                        <a href="?page_no=<?php echo $counter; ?>" class="px-3 py-1 <?php echo $counter == $page_no ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white"><?php echo $counter; ?></a>
+                        <a href="?page_no=<?php echo $counter; ?>" class="px-2 py-1 lg:px-3 lg:py-1 <?php echo $counter == $page_no ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base"><?php echo $counter; ?></a>
                     <?php endfor; ?>
 
                     <?php if ($page_no < $total_number_of_pages): ?>
-                        <a href="?page_no=<?php echo $next_page; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Next</a>
+                        <a href="?page_no=<?php echo $next_page; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Next</a>
                     <?php endif; ?>
                 </div>
             </div>

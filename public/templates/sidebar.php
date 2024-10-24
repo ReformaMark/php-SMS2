@@ -1,5 +1,4 @@
-
-<section class="flex flex-col justify-between pb-5 shadow-md bg-white w-1/5 h-custom max-h-screen overflow-hidden">
+<section class="hidden lg:flex flex-col justify-between pb-5 shadow-md bg-white w-1/5 h-custom max-h-screen overflow-hidden">
     <div class="w-full pt-3">
         
           

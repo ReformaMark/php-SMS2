@@ -60,6 +60,13 @@
                 </svg>
                 Transactions
             </a>
+            <a href="/php-SMS2/src/layouts/enrollments.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                <path d="M17 16v2H7v-2H5v4h14v-4H17z"/>
+            </svg>
+                Enrollments
+            </a>
             <a href="/php-SMS2/src/layouts/bi_reports.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1 14h2v-2h-2v2zm0-4h2V7h-2v5z"/>
