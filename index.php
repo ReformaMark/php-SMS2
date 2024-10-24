@@ -1,8 +1,12 @@
 <?php
     require_once "src/config_session.php";
 
-    if(isset($_SESSION['user_id'])){
-        header("Location: ./src/layouts/dashboard.php");
+    if (isset($_SESSION['user_id'])) {
+        if ($_SESSION['user_role'] === 'Admin') {
+            header("Location: ./src/layouts/dashboard.php");
+        } elseif ($_SESSION['user_role'] === 'Student') {
+            header("Location: ./src/layouts/student_dashboard.php");
+        }
         die();
     }
 ?>
