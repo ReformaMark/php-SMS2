@@ -24,10 +24,9 @@
     <?php 
         $imageSrc =  '../../public/assets/images/bcp_logo.png';
         include('../../public/templates/header.php');
-       
     ?>
-      <div class="flex flex-col lg:flex-row pt-20"> 
-         <!-- sidebar -->
+    <div class="flex flex-col lg:flex-row pt-20"> 
+        <!-- sidebar -->
         <?php include('../../public/templates/sidebar.php');?>
 
         <!-- Student page -->
@@ -64,7 +63,25 @@
                             ['transaction_id' => 'T003', 'student_id' => 'S003', 'student_name' => 'Alice', 'student_lastname' => 'Johnson', 'amount' => '1500', 'transaction_type' => 'Cash', 'status' => 'Overdue', 'date' => '2023-01-03'],
                             ['transaction_id' => 'T004', 'student_id' => 'S004', 'student_name' => 'Bob', 'student_lastname' => 'Brown', 'amount' => '2000', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-04'],
                             ['transaction_id' => 'T005', 'student_id' => 'S005', 'student_name' => 'Charlie', 'student_lastname' => 'Davis', 'amount' => '2500', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-05'],
+                            ['transaction_id' => 'T006', 'student_id' => 'S006', 'student_name' => 'David', 'student_lastname' => 'Evans', 'amount' => '3000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-06'],
+                            ['transaction_id' => 'T007', 'student_id' => 'S007', 'student_name' => 'Eve', 'student_lastname' => 'Foster', 'amount' => '3500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-07'],
+                            ['transaction_id' => 'T008', 'student_id' => 'S008', 'student_name' => 'Frank', 'student_lastname' => 'Green', 'amount' => '4000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-08'],
+                            ['transaction_id' => 'T009', 'student_id' => 'S009', 'student_name' => 'Grace', 'student_lastname' => 'Harris', 'amount' => '4500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-09'],
+                            ['transaction_id' => 'T010', 'student_id' => 'S010', 'student_name' => 'Hank', 'student_lastname' => 'Ivy', 'amount' => '5000', 'transaction_type' => 'Cash', 'status' => 'Overdue', 'date' => '2023-01-10'],
+                            ['transaction_id' => 'T011', 'student_id' => 'S011', 'student_name' => 'Ivy', 'student_lastname' => 'Jones', 'amount' => '5500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-11'],
+                            ['transaction_id' => 'T012', 'student_id' => 'S012', 'student_name' => 'Jack', 'student_lastname' => 'King', 'amount' => '6000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-12'],
+                            ['transaction_id' => 'T013', 'student_id' => 'S013', 'student_name' => 'Karen', 'student_lastname' => 'Lewis', 'amount' => '6500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-13'],
+                            ['transaction_id' => 'T014', 'student_id' => 'S014', 'student_name' => 'Leo', 'student_lastname' => 'Miller', 'amount' => '7000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-14'],
+                            ['transaction_id' => 'T015', 'student_id' => 'S015', 'student_name' => 'Mia', 'student_lastname' => 'Nelson', 'amount' => '7500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-15']
                         ];
+
+                        // Pagination logic
+                        $perPage = 10;
+                        $totalTransactions = count($mockTransactions);
+                        $totalPages = ceil($totalTransactions / $perPage);
+                        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                        $start = ($currentPage - 1) * $perPage;
+                        $transactions = array_slice($mockTransactions, $start, $perPage);
 
                         if(isset($_GET['search'])){
                             $filter = $_GET['search'];
@@ -72,7 +89,7 @@
                                 return strpos($transaction['transaction_id'], $filter) !== false || strpos($transaction['student_id'], $filter) !== false;
                             });
                         } else {
-                            $transactions = $mockTransactions;
+                            $transactions = array_slice($mockTransactions, $start, $perPage);
                         }
 
                         foreach ($transactions as $transaction) {
@@ -109,6 +126,21 @@
                     ?>
                 </table>
             </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-4 space-x-1">
+                <?php if ($currentPage > 1): ?>
+                    <a href="?page=<?php echo $currentPage - 1; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Prev</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?php echo $i; ?>" class="px-3 py-1 <?php echo $i == $currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white"><?php echo $i; ?></a>
+                <?php endfor; ?>
+
+                <?php if ($currentPage < $totalPages): ?>
+                    <a href="?page=<?php echo $currentPage + 1; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Next</a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 
@@ -125,7 +157,6 @@
             closeButton.addEventListener("click", () => {
                 modal.close();
             });
-            
         });
     </script>
 </body>

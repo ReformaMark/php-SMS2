@@ -76,7 +76,7 @@ function setStudent(object $pdo, string $firstName, string $lastName,string $bir
 
 function getCountStudents(PDO $pdo) {
     try {
-        $query = "SELECT COUNT(*) as total_users FROM students";
+        $query = "SELECT COUNT(*) as total_users FROM users WHERE role = 'Student'";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
