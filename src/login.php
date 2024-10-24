@@ -1,10 +1,14 @@
 <?php
 
+require_once 'config_session.php';
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $username =  $_POST['username'];
     $password = $_POST['password'];
+
+    error_log("Username: $username");
+    error_log("Password: $password");
 
     try {
 
@@ -29,10 +33,26 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
             if($result === false || $result === null) {
                 $errors["incorrect_credentials"] = "Username or password is incorrect!";
-                echo $result;
             } else {
                 if(!isPasswordMatch($password, $result["password_hash"])) {
                     $errors["incorrect_credentials"] = "Username or password is incorrect!";
+                } else {
+                    // Check user role and redirect
+                    $_SESSION['user_id'] = $result['user_id'];
+                    $_SESSION['user_username'] = htmlspecialchars($result['username']);
+                    $_SESSION['user_role'] = $result['role'];
+
+                    $_SESSION["last_regeneration"] = time();
+
+                    if ($result['role'] === 'Admin') {
+                        header("Location: ./layouts/dashboard.php?login=success");
+                    } else {
+                        header("Location: ./layouts/student_dashboard.php?login=success");
+                    }
+
+                    $pdo = null;
+                    $stmt = null;
+                    die();
                 }
             }
         }
@@ -71,13 +91,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             header("Location: ../index.php");
             die();
         }
-
-        $_SESSION['user_id'] = $result['user_id'];
-        $_SESSION['user_username'] = htmlspecialchars($result['username']);
-
-        $_SESSION["last_regeneration"] = time();
-
-        header("Location: ./layouts/dashboard.php?login=success");
 
         $pdo = null;
         $stmt = null;

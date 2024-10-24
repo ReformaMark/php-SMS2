@@ -25,3 +25,6 @@ function regenerateSessionId () {
     session_regenerate_id(true);
     $_SESSION["last_regeneration"] = time();
 }
+
+// Define base URL
+define('BASE_URL', '/php-SMS2');

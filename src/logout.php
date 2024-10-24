@@ -1,8 +1,9 @@
 <?php 
+require_once 'config_session.php';
 
 session_start();
 session_unset();
 session_destroy();
 
-header("location: ../index.php");
+header("Location: " . BASE_URL . "/index.php");
 exit();

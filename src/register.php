@@ -57,13 +57,17 @@
             die();
         }
 
-        createUser($pdo, $username, $password);
+        if (empty($errors)) {
+            // Set default role to 'Student'
+            $role = 'Student';
+            createUser($pdo, $username, $password, $role);
 
-        header("Location: ./layouts/register.php?register=success");
-        $pdo = null;
-        $stmt = null;
+            header("Location: ./layouts/register.php?register=success");
+            $pdo = null;
+            $stmt = null;
 
-        die();
+            die();
+        }
 
         // if username does not exist then register
         // if(!isUsernameExist($pdo, $username)) {

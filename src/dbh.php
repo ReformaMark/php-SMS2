@@ -1,9 +1,9 @@
 <?php
 
 $host = "localhost";
-$dbName = "mis_ledger";
-$dbUsername = "mis_ledger";
-$dbPassword= "v6IA^3kJ3w0N#bC0";
+$dbName = "sms-mis";
+$dbUsername = "root";
+$dbPassword= "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbName", $dbUsername, $dbPassword);
