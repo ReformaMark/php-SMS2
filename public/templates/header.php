@@ -14,7 +14,7 @@
   
     <?php 
         if(isset($_SESSION['user_username'])){
-            include('../../public/templates/userAvatar.php');
+            include($_SERVER['DOCUMENT_ROOT'] . BASE_URL.'/public/templates/userAvatar.php');
         } else {
             echo '<ul class="hidden md:flex justify-center gap-10">
                     <li><a href="#">Home</a></li>

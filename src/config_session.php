@@ -19,4 +19,4 @@ function regenerateSessionId () {
 }
 
 // Define base URL
-define('BASE_URL', '/php-SMS2');
+define('BASE_URL', ($_SERVER['SERVER_NAME'] === 'localhost') ? '/php-SMS2' : '');
