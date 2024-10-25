@@ -40,7 +40,7 @@ foreach ($required_fields as $field) {
     <!-- Navigation bar -->
     <?php 
         $imageSrc = '../../../public/assets/images/bcp_logo.png';
-        include($_SERVER['DOCUMENT_ROOT'] . '/php-SMS2/public/templates/header.php');
+        include('../../../public/templates/header.php');
     ?>
     <div class="flex h-screen pt-20">
         <!-- sidebar -->
