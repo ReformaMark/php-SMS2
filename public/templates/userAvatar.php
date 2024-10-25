@@ -14,7 +14,7 @@
         </button>
         
         <div id="dropdown" class="absolute right-0 mt-3 w-72 bg-white border border-gray-200 rounded-md shadow-xl z-10 hidden opacity-0 transform -translate-y-2 dropdown-transition">
-    <div class="p-4 border-b border-gray-200">
+    <div class="py-2 border-b border-gray-200">
 
         <?php if ($_SESSION['user_role'] === 'Student'): ?>
             <p class="text-sm font-semibold text-gray-600">Signed in as Student</p>
@@ -33,7 +33,7 @@
         <?php endif; ?>
 
     </div>
-    <div class="py-2">
+    <div class="py-2 px-4">
     
         <a href="<?php echo ($_SESSION['user_role'] === 'Student') ?  BASE_URL .'/src/layouts/student_dashboard.php' : BASE_URL .'/src/layouts/dashboard.php'; ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
