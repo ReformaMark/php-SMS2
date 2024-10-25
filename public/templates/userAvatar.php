@@ -34,14 +34,15 @@
 
     </div>
     <div class="py-2">
-        <a href="<?php echo ($_SESSION['user_role'] === 'Student') ? '/php-SMS2/src/layouts/student_dashboard.php' : '/php-SMS2/src/layouts/dashboard.php'; ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+    
+        <a href="<?php echo ($_SESSION['user_role'] === 'Student') ?  BASE_URL .'/src/layouts/student_dashboard.php' : '/php-SMS2/src/layouts/dashboard.php'; ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
             Home
         </a>
         <?php if ($_SESSION['user_role'] === 'Student'): ?>
-            <a href="/php-SMS2/src/layouts/student/profile.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+            <a href="<?= BASE_URL . '/src/layouts/student/profile.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
             </svg>
