@@ -1,6 +1,6 @@
 <div class="relative">
         <button id="avatar" aria-expanded="false" aria-haspopup="true" class="flex items-center gap-x-3 bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-blue-600">
+            <div class="relative flex size-10 shrink-0 overflow-hidden rounded-full bg-blue-600">
                 <span class="flex items-center justify-center h-full w-full text-white font-medium text-lg">
                     <?php echo strtoupper($_SESSION['user_name'][0]) . strtoupper($_SESSION['user_lastname'][0]); ?>
                 </span>
