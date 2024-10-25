@@ -3,6 +3,7 @@ module.exports = {
   content: [ 
     "./public/**/*.php",
     "./src/**/*.php",
+    "./**/*.php", // This will ensure all PHP files are included
     "./index.php",
   ],
    theme: {

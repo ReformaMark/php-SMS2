@@ -17,7 +17,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Ledger</title>
-    <link href="../../output.css" rel="stylesheet" >
+    <link href="/php-SMS2/output.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/styles.css">
 </head>
 <body class="bg-gray-100 min-h-[80vh] flex flex-col justify-between">
