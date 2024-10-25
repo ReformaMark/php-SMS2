@@ -18,6 +18,39 @@ $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student
     <link href="../../output.css" rel="stylesheet" >
     <link rel="stylesheet" href="../../public/css/styles.css">
     <title>Student Dashboard</title>
+    <script>
+        // Function to update the time every second
+        function updateTime() {
+            var currentTime = new Date(); // Get the current time
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+
+            // Determine AM or PM
+            var amPm = hours >= 12 ? "PM" : "AM";
+
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+
+            // Add leading zero to minutes and seconds if they are less than 10
+            minutes = (minutes < 10 ? "0" : "") + minutes;
+            seconds = (seconds < 10 ? "0" : "") + seconds;
+
+            // Format the time with AM/PM
+            var timeString = hours + ":" + minutes + ":" + seconds + " " + amPm;
+
+            // Display the time on the page
+            document.getElementById('clock').innerHTML = timeString;
+        }
+
+        // Update the time as soon as the page loads
+        window.onload = function() {
+            updateTime();
+            // Update the time every second
+            setInterval(updateTime, 1000);
+        };
+    </script>
 </head>
 <body class="bg-gray-100 min-h-[80vh] flex flex-col justify-between">
     <!-- Navigation bar -->
@@ -38,7 +71,7 @@ $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student
                 </h2>
                 <div class="flex items-center">
                     <div class="relative mr-4">
-
+                    <p id="clock"><?php echo date("h:i:s A"); ?></p>
                     </div>
                 </div>
             </div>
@@ -48,6 +81,25 @@ $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student
 
             <!-- Recent Transactions and Data Entry Queue usually tables -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="col-span-2 grid grid-cols-1 sm:grid-cols-4 gap-5">
+                    <div class="bg-white shadow-sm rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-4">Outstanding Balance</h2>
+                        <p>₱ 0.00</p>
+                    </div>
+                    <div class="bg-white shadow-sm rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-4">Next Payment Due </h2>
+                        <p>- </p>
+                    </div>
+                    <div class="bg-white shadow-sm rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-4">Recent Payment</h2>
+                        <p>₱ 0.00</p>
+                    </div>
+                    <div class="bg-white shadow-sm rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-4">Recent Charge</h2>
+                        <p>₱ 0.00</p>
+                    </div>
+               
+                </div>
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">
                         Your Recent Transactions

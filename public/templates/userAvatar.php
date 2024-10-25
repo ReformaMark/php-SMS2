@@ -27,7 +27,7 @@
         <?php else: ?>
             <p class="text-sm font-medium text-gray-500"><?php echo $_SESSION['user_name'] . ' ' . $_SESSION['user_lastname']; ?></p>
         <?php endif; ?>
-
+ 
         <?php if ($_SESSION['user_role'] === 'Student'): ?>
             <p class="text-xs text-gray-500">Student ID: <?php echo $_SESSION['user_username']; ?></p>
         <?php endif; ?>
@@ -113,7 +113,7 @@
             const isExpanded = avatar.getAttribute('aria-expanded') === 'true';
             avatar.setAttribute('aria-expanded', !isExpanded);
             dropdown.classList.toggle('hidden');
-            
+             
             // Add a small delay to ensure the display change happens before the transition
             setTimeout(() => {
                 dropdown.classList.toggle('opacity-0');

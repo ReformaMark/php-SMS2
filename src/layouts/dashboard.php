@@ -79,6 +79,7 @@
 
             <!-- Recent Transactions and Data Entry Queue usually tables -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">
                         Recent Transactions

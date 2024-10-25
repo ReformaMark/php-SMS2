@@ -48,9 +48,9 @@
                         <th class="py-3 px-6 text-center">Student ID</th>
                         <th class="py-3 px-6 text-center">Student Name</th>
                         <th class="py-3 px-6 text-center">Amount</th>
+                        <th class="py-3 px-6 text-center">Date</th>
                         <th class="py-3 px-6 text-center">Type</th>
                         <th class="py-3 px-6 text-center">Status</th>
-                        <th class="py-3 px-6 text-center">Date</th>
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
                     </thead>
