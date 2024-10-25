@@ -14,7 +14,7 @@
         </button>
         
         <div id="dropdown" class="absolute right-0 mt-3 w-72 bg-white border border-gray-200 rounded-md shadow-xl z-10 hidden opacity-0 transform -translate-y-2 dropdown-transition">
-    <div class="lg:flex">
+    <div class="lg:flex p-4">
 
         <?php if ($_SESSION['user_role'] === 'Student'): ?>
             <p class="text-sm font-semibold text-gray-600">Signed in as Student</p>
