@@ -35,7 +35,7 @@
     </div>
     <div class="py-2">
     
-        <a href="<?php echo ($_SESSION['user_role'] === 'Student') ?  BASE_URL .'/src/layouts/student_dashboard.php' : '/php-SMS2/src/layouts/dashboard.php'; ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+        <a href="<?php echo ($_SESSION['user_role'] === 'Student') ?  BASE_URL .'/src/layouts/student_dashboard.php' : BASE_URL .'/src/layouts/dashboard.php'; ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
@@ -55,26 +55,26 @@
                 Transactions
             </a>
         <?php else: ?>
-            <a href="/php-SMS2/src/layouts/transactions.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+            <a href="<?= BASE_URL . '/src/layouts/transactions.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>
                 </svg>
                 Transactions
             </a>
-            <a href="/php-SMS2/src/layouts/enrollments.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+            <a href="<?= BASE_URL . '/src/layouts/enrollments.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
                 <path d="M17 16v2H7v-2H5v4h14v-4H17z"/>
             </svg>
                 Enrollments
             </a>
-            <a href="/php-SMS2/src/layouts/bi_reports.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+            <a href="<?= BASE_URL . '/src/layouts/bi_reports.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1 14h2v-2h-2v2zm0-4h2V7h-2v5z"/>
                 </svg>
                 BI Reports
             </a>
-            <a href="/php-SMS2/src/layouts/payment.php" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+            <a href="<?= BASE_URL . '/src/layouts/payment.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-9h2v2h-2V7zm0 4h2v4h-2v-4z"/>
                 </svg>
@@ -89,7 +89,7 @@
         <?php endif; ?>
     </div>
     <div class="border-t border-gray-200 py-2">
-        <a href="/php-SMS2/src/logout.php" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+        <a href="<?= BASE_URL . '/src/logout.php'?>" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
             </svg>
