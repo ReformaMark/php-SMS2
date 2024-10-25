@@ -62,7 +62,7 @@ $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student
 
     <div class="flex h-screen pt-20">
         <!-- sidebar -->
-        <?php include($_SERVER['DOCUMENT_ROOT'] . BASE_URL . '/public/templates/student_sidebar.php');?>
+        <?php include('../../public/templates/student_sidebar.php');?>
         
         <main class="flex-1 p-8 overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
