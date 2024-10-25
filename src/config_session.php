@@ -19,4 +19,4 @@ function regenerateSessionId () {
 }
 
 // Define base URL
-define('BASE_URL', '/mis.schoolmanagementsystem2.com');
+define('BASE_URL', '/php-SMS2');
