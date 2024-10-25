@@ -80,7 +80,7 @@ $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student
             
 
             <!-- Recent Transactions and Data Entry Queue usually tables -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 lg\:grid-cols-2 gap-6 mb-6">
                 <div class="col-span-2 grid grid-cols-1 sm:grid-cols-4 gap-5">
                     <div class="bg-white shadow-sm rounded-lg p-5">
                         <h2 class="text-xl font-semibold text-blue-800 mb-4">Outstanding Balance</h2>
