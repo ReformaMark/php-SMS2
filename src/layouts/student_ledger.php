@@ -39,7 +39,7 @@
                     <div class="w-full">
                         <h3 class="text-xl font-semibold text-blue-800 mb-4">Personal Information</h3>
                         <?php if ($student): ?>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 justify-between  ">
+                            <div class="grid grid-cols-1  sm:grid-cols-2 gap-x-4 justify-between  ">
                                 <p><strong class="font-medium">Name:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['first_name'] ?? '') . ' ' . htmlspecialchars($student['last_name'] ?? ''); ?></span></p>
                                 <p><strong class="font-medium">Student ID:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['user_id'] ?? ''); ?></span></p>
                                 <p><strong class="font-medium">Email:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['email'] ?? ''); ?></span></p>
