@@ -13,7 +13,7 @@
     
 
     <form action="../register.php" onsubmit="" method="post">
-        <h1 class="md:text-3xl sm:text-2xl text-xl font-semibold text-center pt-3 sm:pt-0 mt-10 mb-5 sm:mt-0 sm:mb-10 border-t border-t-gray-300 sm:border-none ">Register</h1>
+        <h1 class="md:text-3xl sm:text-2xl text-xl text-blue-500 font-semibold text-center pt-3 sm:pt-0 mt-10 mb-5 sm:mt-0 sm:mb-10 border-t border-t-gray-300 sm:border-none ">Register</h1>
 
         <?php
             checkRegisterErrors();
