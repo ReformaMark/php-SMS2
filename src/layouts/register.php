@@ -27,6 +27,13 @@
             visibility: visible;
             opacity: 1.0;
         }
+        .homeBg {
+            background-image: url('../../public/assets/images/bcp-bg.jpg');
+            background-size: cover;
+            background-position: center; 
+            background-repeat: no-repeat;
+        
+        }
     </style>
 </head>
 <body class="homeBg bg-gray-100/50 min-h-[80vh] flex flex-col justify-between">
