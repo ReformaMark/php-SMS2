@@ -12,7 +12,7 @@
     
 
     <form action="src/login.php" onsubmit="" method="post">
-        <h1 class="md:text-3xl sm:text-2xl text-xl font-semibold text-center pt-3 sm:pt-0 mt-10 mb-5 sm:mt-0 sm:mb-10 border-t border-t-gray-300 sm:border-none ">Login</h1>
+        <h1 class="md:text-3xl sm:text-2xl text-xl font-semibold text-center pt-3 sm:pt-0 mt-10 mb-5 sm:mt-0 sm:mb-10 border-t text-black border-t-gray-300 sm:border-none ">Login</h1>
         <div class="relative mb-5 shadow-sm">
             <label for="username" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                 <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>

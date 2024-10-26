@@ -27,7 +27,7 @@
         include('public/templates/header.php') 
     ?>
     <div class="flex px-5 md:px-40 text-white pb-10 pt-24 gap-x-10 justify-between min-h-[100vh]">
-        <div class="hidden sm:flex flex-col gap-y-2 justify-center">
+        <div class="hidden sm:flex flex-col text-black gap-y-2 justify-center">
             <h1 class="lg:text-3xl md:text-4xl sm:text-2xl font-bold font-serif">Welcome to <span class="bg-blue-500">B</span>estlink <span class="bg-blue-500">C</span>ollege</h1>
             <h1 class="md:text-4xl sm:text-2xl  font-bold font-serif">of the <span class="bg-blue-500">P</span>hilippines</h1>
             <h1 class="md:text-3xl sm:text-lg  font-medium font-serif">Student Management System 2</h1>
