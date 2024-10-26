@@ -3,7 +3,7 @@
     require_once "src/Views/login_view.php";
 ?>
 
-<section class="w-full sm:w-1/3 md:w-1/2 bg-white p-10 rounded-lg outline-1 outline-gray-100 shadow-xl">
+<section class="w-full sm:w-1/3 md:w-1/2 bg-white text-black p-10 rounded-lg outline-1 outline-gray-100 shadow-xl">
     <div class="block sm:hidden text-center">
         <h1 class="md:text-4xl sm:text-3xl text-2xl font-semibold font-serif">Welcome to Bestlink College</h1>
         <h1 class="md:text-4xl sm:text-3xl text-2xl font-semibold font-serif">of the Philippines</h1>
@@ -34,7 +34,7 @@
             checkLoginErrors();
         ?>
 
-        <input disabled type="submit" id="loginSubmit" value="Login" name="submit" class="w-full mt-5 bg-[#d3d3d3] text-white hover:cursor-pointer py-2 hover:bg-blue-500/50 transition-colors duration-75 ease-linear rounded-md">
+        <input disabled type="submit" id="loginSubmit" value="Login" name="submit" class="w-full mt-5 bg-blue-500 text-white hover:cursor-pointer py-2 hover:bg-blue-500/50 transition-colors duration-75 ease-linear rounded-md">
     </form>
 
     <h1 class="text-center text-sm text-gray-500">Don't have an account? <a href="./src/layouts/register.php" class="text-blue-500">Register!</a></h1>
