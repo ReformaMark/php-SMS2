@@ -3,7 +3,7 @@
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
     // Development environment (localhost)
     $host = "localhost";
-    $dbName = "php-sms2";  // Local database name
+    $dbName = "sms-mis";  // Local database name
     $dbUsername = "root";          // Local database username
     $dbPassword = "";              // Local database password (usually empty for localhost)
 } else {

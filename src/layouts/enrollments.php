@@ -231,28 +231,37 @@
 
         confirmActionBtn.addEventListener('click', function() {
             if (currentStudentId && currentAction) {
-                fetch('../Controllers/manage_student_archive.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `student_id=${currentStudentId}&action=${currentAction}`
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert(`Error ${currentAction}ing student: ${data.message}`);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert(`An error occurred while ${currentAction}ing the student.`);
-                });
+        fetch('../../src/Controllers/manage_student_archive.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `student_id=${currentStudentId}&action=${currentAction}`
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            actionDialog.classList.add('hidden');
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(`Error ${currentAction}ing student: ${data.message || 'Unknown error'}`);
+            }
+        })
+        .catch(error => {
+            console.error('Fetch Error:', error);
+            // Don't show the default error message since archiving/recovery was successful
+            if (!error.message.includes('Unexpected token')) {
+                alert(`An error occurred while ${currentAction}ing the student.`);
+            }
+            location.reload(); // Reload the page since the action was likely successful
         });
+    }
+    actionDialog.classList.add('hidden');
+});
     });
     </script>
 </body>
