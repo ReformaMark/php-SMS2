@@ -16,10 +16,12 @@
         <div id="dropdown" class="absolute right-0 mt-3 w-72 bg-white border border-gray-200 rounded-md shadow-xl z-10 hidden opacity-0 transform -translate-y-2 dropdown-transition">
     <div class="p-4 border-b border-gray-200">
 
-        <?php if ($_SESSION['user_role'] === 'Student'): ?>
-            <p class="text-sm font-semibold text-gray-600">Signed in as Student</p>
-        <?php else: ?>
-            <p class="text-sm font-semibold text-gray-600">Signed in as Admin</p>
+        <?php if ($_SESSION['user_role'] === 'SuperAdmin'): ?>
+            <p class="text-sm font-semibold text-gray-600">Super Administrator</p>
+        <?php elseif ($_SESSION['user_role'] === 'Admin'): ?>
+            <p class="text-sm font-semibold text-gray-600">Administrator</p>
+        <?php elseif ($_SESSION['user_role'] === 'Student'): ?>
+            <p class="text-sm font-semibold text-gray-600">Student</p>
         <?php endif; ?>
 
         <?php if ($_SESSION['user_role'] === 'Student'): ?>
@@ -35,12 +37,30 @@
     </div>
     <div class="py-2">
     
-        <a href="<?php echo ($_SESSION['user_role'] === 'Student') ?  BASE_URL .'/src/layouts/student_dashboard.php' : BASE_URL .'/src/layouts/dashboard.php'; ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-            </svg>
-            Home
-        </a>
+    <a href="<?php 
+    if ($_SESSION['user_role'] === 'Student') {
+        echo BASE_URL .'/src/layouts/student_dashboard.php';
+    } elseif ($_SESSION['user_role'] === 'SuperAdmin') {
+        echo BASE_URL .'/src/layouts/super_admin_dashboard.php';
+    } else {
+        echo BASE_URL .'/src/layouts/dashboard.php';
+    }
+?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+    Dashboard
+</a>
+
+        <?php if ($_SESSION['user_role'] === 'SuperAdmin'): ?>
+            <a href="<?= BASE_URL . '/src/layouts/manage_admins.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 4.354a4 4 0 110 5.292V4.354zM15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197L15 21zM13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                Manage Administrators
+            </a>
+        <?php endif; ?>
+
         <?php if ($_SESSION['user_role'] === 'Student'): ?>
             <a href="<?= BASE_URL . '/src/layouts/student/profile.php' ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">

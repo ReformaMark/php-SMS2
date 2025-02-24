@@ -46,10 +46,16 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
                     $_SESSION["last_regeneration"] = time();
 
-                    if ($result['role'] === 'Admin') {
-                        header("Location: ./layouts/dashboard.php?login=success");
-                    } else {
-                        header("Location: ./layouts/student_dashboard.php?login=success");
+                    switch ($result['role']) {
+                        case 'SuperAdmin':
+                            header("Location: ./layouts/super_admin_dashboard.php");
+                            break;
+                        case 'Admin':
+                            header("Location: ./layouts/dashboard.php?login=success");
+                            break;
+                        default:
+                            header("Location: ./layouts/student_dashboard.php?login=success");
+                            break;
                     }
 
                     $pdo = null;
