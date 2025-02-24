@@ -29,13 +29,22 @@ function getAllAdmins(object $pdo) {
     }
 }
 
-function createAdmin(object $pdo, array $adminData) {
+function createAdmin(object $pdo, array $adminData): bool {
     try {
-        $query = "INSERT INTO users (username, first_name, last_name, email, password_hash, role, status) 
-                  VALUES (:username, :first_name, :last_name, :email, :password_hash, 'Admin', 'Active')";
+        $query = "INSERT INTO users (username, first_name, last_name, email, password_hash, role) 
+                  VALUES (:username, :first_name, :last_name, :email, :password_hash, 'Admin')";
+        
+        // Hash the password
+        $password_hash = password_hash($adminData['password'], PASSWORD_DEFAULT);
+        
         $stmt = $pdo->prepare($query);
-        $stmt->execute($adminData);
-        return $pdo->lastInsertId();
+        return $stmt->execute([
+            'username' => $adminData['username'],
+            'first_name' => $adminData['first_name'],
+            'last_name' => $adminData['last_name'],
+            'email' => $adminData['email'],
+            'password_hash' => $password_hash
+        ]);
     } catch (PDOException $e) {
         error_log("Database error in createAdmin: " . $e->getMessage());
         return false;
@@ -81,4 +90,102 @@ function getDashboardStats(object $pdo): array {
             error_log("Error in getDashboardStats: " . $e->getMessage());
             return [];
         }
+}
+
+function updateAdmin(object $pdo, int $adminId, array $adminData): bool {
+    try {
+        $fields = [
+            'username' => $adminData['username'],
+            'first_name' => $adminData['first_name'],
+            'last_name' => $adminData['last_name'],
+            'email' => $adminData['email'],
+            'admin_id' => $adminId
+        ];
+
+        $query = "UPDATE users 
+                  SET username = :username,
+                      first_name = :first_name,
+                      last_name = :last_name,
+                      email = :email";
+
+        // Only update password if provided
+        if (!empty($adminData['password'])) {
+            $query .= ", password_hash = :password_hash";
+            $fields['password_hash'] = password_hash($adminData['password'], PASSWORD_DEFAULT);
+        }
+
+        $query .= " WHERE user_id = :admin_id AND role = 'Admin'";
+        
+        $stmt = $pdo->prepare($query);
+        return $stmt->execute($fields);
+    } catch (PDOException $e) {
+        error_log("Database error in updateAdmin: " . $e->getMessage());
+        return false;
+    }
+}
+
+function toggleAdminStatus(object $pdo, int $adminId): bool {
+    try {
+        $query = "UPDATE users 
+                  SET is_archived = NOT is_archived 
+                  WHERE user_id = ? AND role = 'Admin'";
+        $stmt = $pdo->prepare($query);
+        return $stmt->execute([$adminId]);
+    } catch (PDOException $e) {
+        error_log("Database error in toggleAdminStatus: " . $e->getMessage());
+        return false;
+    }
+}
+
+function getAdminById(object $pdo, int $adminId): ?array {
+    try {
+        $query = "SELECT user_id, username, first_name, last_name, email, is_archived 
+                  FROM users 
+                  WHERE user_id = ? AND role = 'Admin'";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$adminId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    } catch (PDOException $e) {
+        error_log("Database error in getAdminById: " . $e->getMessage());
+        return null;
+    }
+}
+
+function checkUsernameExists(object $pdo, string $username, ?int $excludeId = null): bool {
+    try {
+        $query = "SELECT COUNT(*) FROM users WHERE username = ?";
+        $params = [$username];
+        
+        if ($excludeId) {
+            $query .= " AND user_id != ?";
+            $params[] = $excludeId;
+        }
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($params);
+        return (bool)$stmt->fetchColumn();
+    } catch (PDOException $e) {
+        error_log("Database error in checkUsernameExists: " . $e->getMessage());
+        return false;
+    }
+}
+
+function checkEmailExists(object $pdo, string $email, ?int $excludeId = null): bool {
+    try {
+        $sql = "SELECT COUNT(*) FROM users WHERE email = :email";
+        $params = ['email' => $email];
+        
+        if ($excludeId !== null) {
+            $sql .= " AND user_id != :excludeId";
+            $params['excludeId'] = $excludeId;
+        }
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        
+        return (int)$stmt->fetchColumn() > 0;
+    } catch (PDOException $e) {
+        error_log("Database error in checkEmailExists: " . $e->getMessage());
+        return false;
+    }
 }

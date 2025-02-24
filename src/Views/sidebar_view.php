@@ -10,17 +10,27 @@ declare(strict_types=1);
     $userRole = $_SESSION['user_role'] ?? '';
 
     //dashboard
+    if($userRole === "Admin") {
     if(basename($_SERVER['PHP_SELF']) === 'dashboard.php'){
         echo '<a href="../layouts/dashboard.php" class="w-full flex items-center gap-x-3 bg-blue-500 translate-x-5 pl-5 rounded-l-full text-white transition-all duration-500 ease-linear font-normal text-lg  border-b p-1">
                 <svg class="size-5 " height="32" data-name="Livello 1" id="Livello_1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><title/><path d="M127.12,60.22,115.46,48.56h0L69,2.05a7,7,0,0,0-9.9,0L12.57,48.53h0L.88,60.22a3,3,0,0,0,4.24,4.24l6.57-6.57V121a7,7,0,0,0,7,7H46a7,7,0,0,0,7-7V81a1,1,0,0,1,1-1H74a1,1,0,0,1,1,1v40a7,7,0,0,0,7,7h27.34a7,7,0,0,0,7-7V57.92l6.54,6.54a3,3,0,0,0,4.24-4.24ZM110.34,121a1,1,0,0,1-1,1H82a1,1,0,0,1-1-1V81a7,7,0,0,0-7-7H54a7,7,0,0,0-7,7v40a1,1,0,0,1-1,1H18.69a1,1,0,0,1-1-1V51.9L63.29,6.29a1,1,0,0,1,1.41,0l45.63,45.63Z"/></svg>
                 Dashboard
             </a>';
-    } else if(basename($_SERVER['PHP_SELF']) === 'student_dashboard.php'){
-        echo '<a href="../layouts/dashboard.php" class="w-full flex items-center gap-x-3 pl-3 hover:bg-blue-500 hover:translate-x-5 hover:pl-5 hover:rounded-l-full hover:text-white transition-all duration-500 ease-linear  font-normal text-lg border-b p-1">
-            <svg class="size-5 " height="32" id="icon" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title/><path d="M24,30H8a2.0023,2.0023,0,0,1-2-2V4A2.002,2.002,0,0,1,8,2H24a2.0023,2.0023,0,0,1,2,2V20.6182l-5-2.5-5,2.5V4H8V28H24V24h2v4A2.0027,2.0027,0,0,1,24,30ZM21,15.8818l3,1.5V4H18V17.3818Z"/><rect class="cls-1" data-name="&lt;Transparent Rectangle&gt;" height="32" id="_Transparent_Rectangle_" width="32"/></svg>    
+    } else {
+        echo '<a href="../layouts/dashboard.php" class="w-full flex items-center gap-x-3 pl-3 hover:bg-blue-500 hover:translate-x-5 hover:pl-5 hover:rounded-l-full hover:text-white transition-all duration-500 ease-linear font-normal text-lg border-b p-1">
+                <svg class="size-5" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M127.12,60.22,115.46,48.56h0L69,2.05a7,7,0,0,0-9.9,0L12.57,48.53h0L.88,60.22a3,3,0,0,0,4.24,4.24l6.57-6.57V121a7,7,0,0,0,7,7H46a7,7,0,0,0,7-7V81a1,1,0,0,1,1-1H74a1,1,0,0,1,1,1v40a7,7,0,0,0,7,7h27.34a7,7,0,0,0,7-7V57.92l6.54,6.54a3,3,0,0,0,4.24-4.24Z"/>
+                </svg>
                 Dashboard
             </a>';
     }
+    // else if(basename($_SERVER['PHP_SELF']) === 'student_dashboard.php'){
+    //     echo '<a href="../layouts/dashboard.php" class="w-full flex items-center gap-x-3 pl-3 hover:bg-blue-500 hover:translate-x-5 hover:pl-5 hover:rounded-l-full hover:text-white transition-all duration-500 ease-linear  font-normal text-lg border-b p-1">
+    //         <svg class="size-5 " height="32" id="icon" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title/><path d="M24,30H8a2.0023,2.0023,0,0,1-2-2V4A2.002,2.002,0,0,1,8,2H24a2.0023,2.0023,0,0,1,2,2V20.6182l-5-2.5-5,2.5V4H8V28H24V24h2v4A2.0027,2.0027,0,0,1,24,30ZM21,15.8818l3,1.5V4H18V17.3818Z"/><rect class="cls-1" data-name="&lt;Transparent Rectangle&gt;" height="32" id="_Transparent_Rectangle_" width="32"/></svg>    
+    //             Dashboard
+    //         </a>';
+    // }
+}
 
     // Admin Management Link
     if($userRole === 'SuperAdmin') {
