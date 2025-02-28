@@ -134,28 +134,42 @@ function fetchStudents(object $pdo, ?string $filter, int $offset, int $limit, bo
 
 
 
-function archiveStudent(object $pdo, int $student_id) {
+function getStudentById(object $pdo, int $studentId): ?array {
     try {
-        $query = "UPDATE users SET is_archived = TRUE WHERE user_id = :student_id AND role = 'Student'";
+        $query = "SELECT * FROM users WHERE user_id = ? AND role = 'Student'";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":student_id", $student_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount() > 0;
+        $stmt->execute([$studentId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     } catch (PDOException $e) {
-        error_log("Database error in archiveStudent: " . $e->getMessage());
-        throw new Exception("Database error occurred.");
+        error_log("Database error in getStudentById: " . $e->getMessage());
+        return null;
     }
 }
 
-function recoverStudent(object $pdo, int $student_id) {
+function archiveStudent(object $pdo, int $studentId): bool {
     try {
-        $query = "UPDATE users SET is_archived = FALSE WHERE user_id = :student_id AND role = 'Student'";
+        $query = "UPDATE users 
+                  SET is_archived = TRUE 
+                  WHERE user_id = ? AND role = 'Student'";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":student_id", $student_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt->execute([$studentId]);
+        return $stmt->rowCount() > 0;
+    } catch (PDOException $e) {
+        error_log("Database error in archiveStudent: " . $e->getMessage());
+        return false;
+    }
+}
+
+function recoverStudent(object $pdo, int $studentId): bool {
+    try {
+        $query = "UPDATE users 
+                  SET is_archived = FALSE 
+                  WHERE user_id = ? AND role = 'Student'";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$studentId]);
         return $stmt->rowCount() > 0;
     } catch (PDOException $e) {
         error_log("Database error in recoverStudent: " . $e->getMessage());
-        throw new Exception("Database error occurred.");
+        return false;
     }
 }

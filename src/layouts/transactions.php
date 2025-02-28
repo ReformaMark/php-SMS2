@@ -1,13 +1,14 @@
 <?php
 
     require_once "../config_session.php";
+    require_once "../dbh.php";
+    require_once "../Models/transactions_model.php";
+    require_once "../Views/transactions_view.php";
+    
     if(!isset($_SESSION['user_id'])){
         header("Location: ../../index.php");
         die();
     }
-
-    require_once "../Models/transactions_model.php";
-    require_once "../Views/transactions_view.php";
 ?>
 
 <!DOCTYPE html>

@@ -231,37 +231,40 @@
 
         confirmActionBtn.addEventListener('click', function() {
             if (currentStudentId && currentAction) {
-        fetch('../../src/Controllers/manage_student_archive.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `student_id=${currentStudentId}&action=${currentAction}`
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const formData = new FormData();
+                formData.append('student_id', currentStudentId);
+                formData.append('action', currentAction);
+
+                fetch('../../src/Controllers/manage_student_archive.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => Promise.reject(err));
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        actionDialog.classList.add('hidden');
+                        // Add small delay to ensure notification is created
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500);
+                    } else {
+                        throw new Error(data.message || `Failed to ${currentAction} student`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // alert(error.message || `An error occurred while ${currentAction}ing the student`);
+                })
+                .finally(() => {
+                    actionDialog.classList.add('hidden');
+                });
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            } else {
-                alert(`Error ${currentAction}ing student: ${data.message || 'Unknown error'}`);
-            }
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-            // Don't show the default error message since archiving/recovery was successful
-            if (!error.message.includes('Unexpected token')) {
-                alert(`An error occurred while ${currentAction}ing the student.`);
-            }
-            location.reload(); // Reload the page since the action was likely successful
         });
-    }
-    actionDialog.classList.add('hidden');
-});
     });
     </script>
 </body>

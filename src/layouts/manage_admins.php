@@ -279,68 +279,45 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'SuperAdmin') {
                     });
                 });
 
-                // Form submission
                 adminForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                // Create FormData object
-                const formData = new FormData(adminForm);
-
-                if (isEditing && editingAdminId) {
-                    formData.append('action', 'update');
-                    formData.append('admin_id', editingAdminId);
-                } else {
-                    formData.append('action', 'create');
-                }
-
-                // Add action if not present
-                if (!formData.has('action')) {
-                    formData.append('action', 'create');
-                }
-
-                try {
-                    const response = await fetch('../Controllers/admin_controller.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const contentType = response.headers.get("content-type");
-                    if (!contentType || !contentType.includes("application/json")) {
-                        // If operation was successful (admin created), just reload
-                        if (response.ok) {
-                            location.reload();
-                            return;
-                        }
-                        throw new Error("Invalid response format");
-                    }
-
-                    const result = await response.json();
+                    e.preventDefault();
+                    const formData = new FormData(adminForm);
                     
-                    if (result.success) {
-                        hideModal();
-                        location.reload();
+                    if (isEditing && editingAdminId) {
+                        formData.append('action', 'update');
+                        formData.append('admin_id', editingAdminId);
                     } else {
-                        const errorMessage = result.errors ? 
-                            Object.values(result.errors).join('\n') : 
-                            result.message || 'Error processing request';
-                        alert(errorMessage);
+                        formData.append('action', 'create');
                     }
-                } catch (error) {
-                    console.error('Error details:', error);
-                    // Check if admin was actually created despite the error
-                    // If so, reload the page instead of showing error
-                    const formUsername = formData.get('username');
-                    if (document.querySelector(`td:contains('${formUsername}')`)) {
-                        location.reload();
-                    } else {
-                        alert('Please verify if the administrator was created. If not, try again.');
+
+                    try {
+                        const response = await fetch('../Controllers/admin_controller.php', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            hideModal();
+                            // Add small delay to ensure notification is created before reload
+                            setTimeout(() => {
+                                location.reload();
+                            }, 100);
+                        } else {
+                            const errorMessage = result.errors ? 
+                                Object.values(result.errors).join('\n') : 
+                                result.message || 'Error processing request';
+                            alert(errorMessage);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
                     }
-                }
-            });
+                });
 
                 // Toggle admin status
                 document.querySelectorAll('.toggle-status').forEach(btn => {
@@ -362,24 +339,18 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'SuperAdmin') {
                                     })
                                 });
 
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                
                                 const result = await response.json();
                                 if (result.success) {
-                                    location.reload();
+                                    // Add small delay to ensure notification is created before reload
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 100);
                                 } else {
                                     throw new Error(result.message || 'Failed to update administrator status');
                                 }
                             } catch (error) {
                                 console.error('Error:', error);
-                                // Check if operation was successful despite error
-                                if (!document.querySelector(`[data-admin-id="${adminId}"]`)) {
-                                    location.reload();
-                                } else {
-                                    alert('Failed to update administrator status');
-                                }
+                                alert('Failed to update administrator status');
                             }
                         }
                     });
