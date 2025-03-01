@@ -2,6 +2,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $firstname = $_POST['firstname'] ?? '';
+    $middlename = $_POST["middlename"] ?? '';
     $lastname = $_POST['lastname'] ?? '';
     $email = $_POST['email'] ?? '';
     $username = $_POST['username'] ?? '';
@@ -21,6 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["firstname_empty"] = "First name is required!";
         } elseif (!preg_match('/^[a-zA-Z.-]+$/', $firstname)) {
             $errors["firstname_invalid"] = "First name can only contain letters, dots, and hyphens! ex: John Jr.";
+        }
+
+        if (!empty($middlename) && !preg_match('/^[a-zA-Z.-]+$/', $middlename)) {
+            $errors["middlename_invalid"] = "Middle name can only contain letters, dots, and hyphens! ex: De-la";
         }
 
         // Validate last name
@@ -68,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $registerData = [
                 "firstname" => $firstname,
+                "middlename" => $middlename,
                 "lastname" => $lastname,
                 "email" => $email,
                 "username" => $username,
@@ -84,13 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (empty($errors)) {
             // Sanitize inputs
             $firstname = htmlspecialchars($firstname);
+            $middlename = htmlspecialchars($middlename);
             $lastname = htmlspecialchars($lastname);
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $username = htmlspecialchars($username);
 
             // Set default role to 'Student'
             $role = 'Student';
-            createUser($pdo, $firstname, $lastname, $email, $username, $password, $role);
+            createUser($pdo, $firstname, $middlename, $lastname, $email, $username, $password, $role);
 
             header("Location: ./layouts/register.php?register=success");
             $pdo = null;

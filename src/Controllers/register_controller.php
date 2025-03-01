@@ -10,6 +10,11 @@ function isEmailRegistered(object $pdo, string $email) {
     return getEmail($pdo, $email) ? true : false;
 }
 
-function createUser(object $pdo, string $firstname, string $lastname, string $email, string $username, string $password, string $role) {
-    setUser($pdo, $firstname, $lastname, $email, $username, $password, $role);
+function createUser(object $pdo, string $firstname, string $middlename, string $lastname, string $email, string $username, string $password, string $role): void {
+    try {
+        setUser($pdo, $firstname, $middlename, $lastname, $email, $username, $password, $role);
+    } catch (Exception $e) {
+        error_log("Error in createUser: " . $e->getMessage());
+        throw $e;
+    }
 }

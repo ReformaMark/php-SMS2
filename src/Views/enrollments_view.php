@@ -8,10 +8,14 @@ if (!function_exists('displayStudents')) {
             foreach ($students as $student) {
                 echo '<tr class="border-b border-gray-200 hover:bg-gray-100">';
                 echo '<td class="py-3 px-6 text-center whitespace-nowrap">' . htmlspecialchars((string)$student['username']) . '</td>';
-                echo '<td class="py-3 px-6 text-center">' . htmlspecialchars((string)$student['last_name']) . ', ' . htmlspecialchars((string)$student['first_name']) . '</td>';
+                echo    '<td class="py-3 px-6 text-center">' . 
+                            htmlspecialchars((string)$student['first_name']) . ' ' . 
+                            htmlspecialchars((string)$student['last_name']) . ' ' . 
+                            htmlspecialchars((string)$student['middle_name']) . 
+                        '</td>';
                 echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['email']) . '</td>';
-                echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['phone_number']) . '</td>';
-                echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['enrollment_date']) . '</td>';
+                // echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['phone_number']) . '</td>';
+                // echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['enrollment_date']) . '</td>';
                 
                 // Style the status
                 $statusClass = '';

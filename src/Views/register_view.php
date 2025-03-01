@@ -23,6 +23,43 @@
             </div>';
         }
 
+        if(isset($_SESSION['register_data']['middlename']) && !isset($_SESSION['errors_register']['middlename_invalid'])){
+            echo 
+            '<div class="relative mb-5 shadow-sm">
+                <label for="middlename" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
+                    <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </label>
+                <input value="'.$_SESSION['register_data']['middlename'].'" 
+                       type="text" 
+                       name="middlename" 
+                       placeholder="Enter Middle Name"
+                       autocomplete="off"
+                       pattern="^[a-zA-Z.-]+$" 
+                       title="Only letters, dots, and hyphens are allowed" 
+                       class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
+            </div>';
+        } else {
+            echo
+            '<div class="relative mb-5 shadow-sm">
+                <label for="middlename" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
+                    <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </label>
+                <input type="text" 
+                       name="middlename"
+                       autocomplete="off" 
+                       placeholder="Enter Middle Name" 
+                       pattern="^[a-zA-Z.-]+$" 
+                       title="Only letters, dots, and hyphens are allowed" 
+                       class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
+            </div>';
+        }
+
         // Last Name
         if(isset($_SESSION['register_data']['lastname']) && !isset($_SESSION['errors_register']['lastname_invalid'])){
             echo 
