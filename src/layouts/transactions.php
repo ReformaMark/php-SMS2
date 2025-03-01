@@ -27,7 +27,9 @@
         $imageSrc =  '../../public/assets/images/bcp_logo.png';
         include('../../public/templates/header.php');
     ?>
-    <div class="flex flex-col lg:flex-row pt-20"> 
+    <div 
+        style="display: flex; height: 100vh; padding-top: 70px;"
+    >
         <!-- sidebar -->
         <?php include('../../public/templates/sidebar.php');?>
 

@@ -11,7 +11,7 @@
     $outstandingAccounts = array_filter($mockTransactions, function($transaction) {
         return in_array($transaction['status'], ['Pending', 'Partially Paid', 'Overdue']);
     });
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,9 @@
         include('../../public/templates/header.php');
        
     ?>
-    <div class="flex h-screen pt-20"> 
+    <div 
+        style="display: flex; height: 100vh; padding-top: 70px;"
+    >
         <!-- sidebar -->
         <?php include('../../public/templates/sidebar.php');?>
         

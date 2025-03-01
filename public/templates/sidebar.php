@@ -1,4 +1,7 @@
-<section class="hidden lg:flex flex-col justify-between pb-5 shadow-md bg-white w-1/5 h-custom max-h-screen overflow-hidden">
+<section 
+    style="background-color: #212529;"
+    class="hidden lg:flex flex-col justify-between pb-5 shadow-md w-1/5 h-custom max-h-screen overflow-hidden text-white"
+>
     <div class="w-full pt-3">
         
           

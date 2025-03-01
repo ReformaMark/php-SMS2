@@ -1,4 +1,7 @@
-<section class="hidden md:flex flex-col justify-between pb-5 shadow-md bg-white w-1/5 h-custom max-h-screen overflow-hidden">
+<section 
+    style="background-color: #212529;"
+    class="hidden md:flex flex-col justify-between pb-5 text-white shadow-md w-1/5 h-custom max-h-screen overflow-hidden"
+>
     <div class="w-full pt-3">
         <?php include($_SERVER['DOCUMENT_ROOT'] . BASE_URL . '/src/Views/student_sidebar_view.php') ?>
     </div>

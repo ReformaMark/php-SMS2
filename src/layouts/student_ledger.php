@@ -38,7 +38,9 @@
        
     ?>
 
-    <div class="flex h-screen pt-20">
+    <div 
+        style="display: flex; height: 100vh; padding-top: 70px;"
+    >
             <!-- sidebar -->
             <?php include('../../public/templates/student_sidebar.php');?>
 

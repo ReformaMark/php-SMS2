@@ -42,7 +42,9 @@ foreach ($required_fields as $field) {
         $imageSrc = '../../../public/assets/images/bcp_logo.png';
         include('../../../public/templates/header.php');
     ?>
-    <div class="flex h-screen pt-20">
+    <div 
+        style="display: flex; height: 100vh; padding-top: 70px;"
+    >
         <!-- sidebar -->
         <?php include($_SERVER['DOCUMENT_ROOT'] . BASE_URL . '/public/templates/student_sidebar.php');?>
         <main class="flex-1 p-8 overflow-y-auto">
@@ -168,79 +170,65 @@ foreach ($required_fields as $field) {
             let isValid = true;
 
             // Clear previous errors
-
             form.querySelectorAll('input, select, textarea').forEach(input => clearError(input));
 
             // Validate first name
-
             if (!nameRegex.test(formData.get('first_name'))) {
                 showError(form.first_name, 'First name should only contain letters and spaces.');
                 isValid = false;
             }
 
-
-
             // Validate last name
-
             if (!nameRegex.test(formData.get('last_name'))) {
                 showError(form.last_name, 'Last name should only contain letters and spaces.');
                 isValid = false;
             }
 
-
-
             // Validate phone number
-
             if (!phoneRegex.test(formData.get('phone_number'))) {
                 showError(form.phone_number, 'Phone number should contain exactly 11 digits.');
                 isValid = false;
             }
 
-
-
             if (!isValid) {
                 return;
             }
-
-
 
             fetch('update_profile.php', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     location.reload(); // Reload the page to show updated information
                 } else {
                     // Show error message at the top of the form
                     let errorDiv = document.getElementById('form-error');
-
                     if (!errorDiv) {
                         errorDiv = document.createElement('div');
                         errorDiv.id = 'form-error';
                         errorDiv.classList.add('bg-red-100', 'border', 'border-red-400', 'text-red-700', 'px-4', 'py-3', 'rounded', 'relative', 'mb-4');
                         form.prepend(errorDiv);
                     }
-
                     errorDiv.textContent = data.message || 'Failed to update profile. Please try again.';
                 }
-
             })
-
             .catch(error => {
                 console.error('Error:', error);
                 // Show error message at the top of the form
-
                 let errorDiv = document.getElementById('form-error');
-
                 if (!errorDiv) {
                     errorDiv = document.createElement('div');
                     errorDiv.id = 'form-error';
                     errorDiv.classList.add('bg-red-100', 'border', 'border-red-400', 'text-red-700', 'px-4', 'py-3', 'rounded', 'relative', 'mb-4');
                     form.prepend(errorDiv);
                 }
-
                 errorDiv.textContent = 'An error occurred. Please try again.';
             });
         }
