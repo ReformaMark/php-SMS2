@@ -78,53 +78,68 @@
             </div>
 
             <!-- Recent Transactions and Data Entry Queue usually tables -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 gap-6 mb-6">
                 
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">
                         Recent Transactions
                     </h3>
 
-                    <div class="mb-4">
-                    <select class="bg-gray-100 border border-gray-300 rounded px-3 py-1">
-                            <option value="all">All Transactions</option>
-                            <option value="payments">Payments</option>
-                            <option value="charges">Charges</option>
-                    </select>
-                    </div>
-
                     <table class="w-full">
                         <thead>
                             <tr class="bg-blue-100">
                                 <th class="py-2 px-4 text-left">Date</th>
-                                <th class="py-2 px-4 text-left">Type</th>
+                                <th class="py-2 px-4 text-left">Transaction ID</th>
+                                <th class="py-2 px-4 text-left">Student Name</th>
                                 <th class="py-2 px-4 text-left">Amount</th>
+                                <th class="py-2 px-4 text-left">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // Sample data
-                            $transactions = [
-                                ['date' => '2023-05-01', 'type' => 'Payment', 'amount' => 25000],
-                                ['date' => '2023-05-02', 'type' => 'Charge', 'amount' => 50000],
-                                ['date' => '2023-05-03', 'type' => 'Payment', 'amount' => 37500],
-                                ['date' => '2023-05-04', 'type' => 'Charge', 'amount' => 12500],
-                                ['date' => '2023-05-05', 'type' => 'Payment', 'amount' => 50000],
-                            ];
+                        <?php
+                        // Get the mock transactions array from transactions.php
+                        $mockTransactions = [
+                            ['transaction_id' => 'T015', 'student_id' => 's21013225', 'student_name' => 'Mia', 'student_lastname' => 'Nelson', 'amount' => '7500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-15'],
+                            ['transaction_id' => 'T014', 'student_id' => 's21013224', 'student_name' => 'Leo', 'student_lastname' => 'Miller', 'amount' => '7000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-14'],
+                            ['transaction_id' => 'T013', 'student_id' => 's21013223', 'student_name' => 'Karen', 'student_lastname' => 'Lewis', 'amount' => '6500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-13'],
+                            ['transaction_id' => 'T012', 'student_id' => 's21013222', 'student_name' => 'Jack', 'student_lastname' => 'King', 'amount' => '6000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-12'],
+                            ['transaction_id' => 'T011', 'student_id' => 's21013221', 'student_name' => 'Ivy', 'student_lastname' => 'Jones', 'amount' => '5500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-11']
+                        ];
 
-                            foreach ($transactions as $index => $transaction):
-                            ?>
-                            <tr class="<?php echo $index % 2 == 0 ? 'bg-gray-50' : 'bg-white'; ?>">
-                                <td class="py-2 px-4"><?php echo $transaction['date']; ?></td>
-                                <td class="py-2 px-4"><?php echo $transaction['type']; ?></td>
-                                <td class="py-2 px-4">₱<?php echo number_format($transaction['amount']); ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
+                        foreach ($mockTransactions as $index => $transaction):
+                            // Determine status color
+                            $statusClass = '';
+                            switch ($transaction['status']) {
+                                case 'Paid':
+                                    $statusClass = 'bg-green-200 text-green-600';
+                                    break;
+                                case 'Partially Paid':
+                                    $statusClass = 'bg-yellow-200 text-yellow-600';
+                                    break;
+                                case 'Overdue':
+                                    $statusClass = 'bg-red-200 text-red-600';
+                                    break;
+                                default:
+                                    $statusClass = 'bg-gray-200 text-gray-600';
+                            }
+                        ?>
+                        <tr class="<?php echo $index % 2 == 0 ? 'bg-gray-50' : 'bg-white'; ?> hover:bg-gray-100">
+                            <td class="py-2 px-4"><?php echo $transaction['date']; ?></td>
+                            <td class="py-2 px-4"><?php echo $transaction['transaction_id']; ?></td>
+                            <td class="py-2 px-4"><?php echo $transaction['student_name'] . ' ' . $transaction['student_lastname']; ?></td>
+                            <td class="py-2 px-4">₱<?php echo number_format($transaction['amount'], 2); ?></td>
+                            <td class="py-2 px-4">
+                                <span class="px-2 py-1 rounded-full text-xs <?php echo $statusClass; ?>">
+                                    <?php echo $transaction['status']; ?>
+                                </span>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                     </table>
                 </div>
 
-                <div class="bg-white rounded-lg shadow p-6">
+                <!-- <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">Data Entry Queue</h3>
                     <div class="mb-4">
                         <div class="flex justify-between items-center">
@@ -149,26 +164,26 @@
                             <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">2</span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <!-- Monthly Financial Trend Chart -->
-                <div class="bg-white rounded-lg shadow p-6">
+                <!-- <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">Monthly Financial Trend</h3>
                     <canvas id="financialTrendChart"></canvas>
-                </div>
+                </div> -->
 
                 <!-- Student Account Status Pie Chart -->
-                <div class="bg-white rounded-lg shadow p-6">
+                <!-- <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">Student Account Status</h3>
                     <canvas id="accountStatusChart"></canvas>
-                </div>
+                </div> -->
             </div>
         </main>
     </div>
 
-    <script>
+    <!-- <script>
         // Monthly Financial Trend Chart
         const financialTrendCtx = document.getElementById('financialTrendChart').getContext('2d');
         new Chart(financialTrendCtx, {
@@ -227,6 +242,6 @@
                 }
             }
         });
-    </script>
+    </script> -->
 </body>
 </html>

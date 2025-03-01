@@ -52,28 +52,28 @@
                         <th class="py-3 px-6 text-center">Date</th>
                         <th class="py-3 px-6 text-center">Type</th>
                         <th class="py-3 px-6 text-center">Status</th>
-                        <th class="py-3 px-6 text-center">Actions</th>
+                        <!-- <th class="py-3 px-6 text-center">Actions</th> -->
                     </tr>
                     </thead>
 
                     <?php  
                         // Mock data for transactions
                         $mockTransactions = [
-                            ['transaction_id' => 'T001', 'student_id' => 'S001', 'student_name' => 'John', 'student_lastname' => 'Doe', 'amount' => '1000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-01'],
-                            ['transaction_id' => 'T002', 'student_id' => 'S002', 'student_name' => 'Jane', 'student_lastname' => 'Smith', 'amount' => '500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-02'],
-                            ['transaction_id' => 'T003', 'student_id' => 'S003', 'student_name' => 'Alice', 'student_lastname' => 'Johnson', 'amount' => '1500', 'transaction_type' => 'Cash', 'status' => 'Overdue', 'date' => '2023-01-03'],
-                            ['transaction_id' => 'T004', 'student_id' => 'S004', 'student_name' => 'Bob', 'student_lastname' => 'Brown', 'amount' => '2000', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-04'],
-                            ['transaction_id' => 'T005', 'student_id' => 'S005', 'student_name' => 'Charlie', 'student_lastname' => 'Davis', 'amount' => '2500', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-05'],
-                            ['transaction_id' => 'T006', 'student_id' => 'S006', 'student_name' => 'David', 'student_lastname' => 'Evans', 'amount' => '3000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-06'],
-                            ['transaction_id' => 'T007', 'student_id' => 'S007', 'student_name' => 'Eve', 'student_lastname' => 'Foster', 'amount' => '3500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-07'],
-                            ['transaction_id' => 'T008', 'student_id' => 'S008', 'student_name' => 'Frank', 'student_lastname' => 'Green', 'amount' => '4000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-08'],
-                            ['transaction_id' => 'T009', 'student_id' => 'S009', 'student_name' => 'Grace', 'student_lastname' => 'Harris', 'amount' => '4500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-09'],
-                            ['transaction_id' => 'T010', 'student_id' => 'S010', 'student_name' => 'Hank', 'student_lastname' => 'Ivy', 'amount' => '5000', 'transaction_type' => 'Cash', 'status' => 'Overdue', 'date' => '2023-01-10'],
-                            ['transaction_id' => 'T011', 'student_id' => 'S011', 'student_name' => 'Ivy', 'student_lastname' => 'Jones', 'amount' => '5500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-11'],
-                            ['transaction_id' => 'T012', 'student_id' => 'S012', 'student_name' => 'Jack', 'student_lastname' => 'King', 'amount' => '6000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-12'],
-                            ['transaction_id' => 'T013', 'student_id' => 'S013', 'student_name' => 'Karen', 'student_lastname' => 'Lewis', 'amount' => '6500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-13'],
-                            ['transaction_id' => 'T014', 'student_id' => 'S014', 'student_name' => 'Leo', 'student_lastname' => 'Miller', 'amount' => '7000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-14'],
-                            ['transaction_id' => 'T015', 'student_id' => 'S015', 'student_name' => 'Mia', 'student_lastname' => 'Nelson', 'amount' => '7500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-15']
+                            ['transaction_id' => 'T001', 'student_id' => 's21013211', 'student_name' => 'John', 'student_lastname' => 'Doe', 'amount' => '1000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-01'],
+                            ['transaction_id' => 'T002', 'student_id' => 's21013212', 'student_name' => 'Jane', 'student_lastname' => 'Smith', 'amount' => '500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-02'],
+                            ['transaction_id' => 'T003', 'student_id' => 's21013213', 'student_name' => 'Alice', 'student_lastname' => 'Johnson', 'amount' => '1500', 'transaction_type' => 'Cash', 'status' => 'Overdue', 'date' => '2023-01-03'],
+                            ['transaction_id' => 'T004', 'student_id' => 's21013214', 'student_name' => 'Bob', 'student_lastname' => 'Brown', 'amount' => '2000', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-04'],
+                            ['transaction_id' => 'T005', 'student_id' => 's21013215', 'student_name' => 'Charlie', 'student_lastname' => 'Davis', 'amount' => '2500', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-05'],
+                            ['transaction_id' => 'T006', 'student_id' => 's21013216', 'student_name' => 'David', 'student_lastname' => 'Evans', 'amount' => '3000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-06'],
+                            ['transaction_id' => 'T007', 'student_id' => 's21013217', 'student_name' => 'Eve', 'student_lastname' => 'Foster', 'amount' => '3500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-07'],
+                            ['transaction_id' => 'T008', 'student_id' => 's21013218', 'student_name' => 'Frank', 'student_lastname' => 'Green', 'amount' => '4000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-08'],
+                            ['transaction_id' => 'T009', 'student_id' => 's21013219', 'student_name' => 'Grace', 'student_lastname' => 'Harris', 'amount' => '4500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-09'],
+                            ['transaction_id' => 'T010', 'student_id' => 's21013220', 'student_name' => 'Hank', 'student_lastname' => 'Ivy', 'amount' => '5000', 'transaction_type' => 'Cash', 'status' => 'Overdue', 'date' => '2023-01-10'],
+                            ['transaction_id' => 'T011', 'student_id' => 's21013221', 'student_name' => 'Ivy', 'student_lastname' => 'Jones', 'amount' => '5500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-11'],
+                            ['transaction_id' => 'T012', 'student_id' => 's21013222', 'student_name' => 'Jack', 'student_lastname' => 'King', 'amount' => '6000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-12'],
+                            ['transaction_id' => 'T013', 'student_id' => 's21013223', 'student_name' => 'Karen', 'student_lastname' => 'Lewis', 'amount' => '6500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-13'],
+                            ['transaction_id' => 'T014', 'student_id' => 's21013224', 'student_name' => 'Leo', 'student_lastname' => 'Miller', 'amount' => '7000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-14'],
+                            ['transaction_id' => 'T015', 'student_id' => 's21013225', 'student_name' => 'Mia', 'student_lastname' => 'Nelson', 'amount' => '7500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-15']
                         ];
 
                         // Pagination logic
@@ -118,17 +118,17 @@
                             }
                             echo "<td class='py-3 px-6 text-center'><span class='py-1 px-3 rounded-full text-xs {$statusClass}'>{$transaction['status']}</span></td>";
                             
-                            echo "<td class='py-3 px-6 text-center'>
-                                                <div class='flex item-center justify-center'>
-                                                    <div class='w-4 mr-2 transform hover:text-sky-500 hover:scale-110 cursor-pointer'>
-                                                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                                                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
-                                                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                              </td>";
-                            echo "</tr>";
+                            // echo "<td class='py-3 px-6 text-center'>
+                            //                     <div class='flex item-center justify-center'>
+                            //                         <div class='w-4 mr-2 transform hover:text-sky-500 hover:scale-110 cursor-pointer'>
+                            //                             <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                            //                                 <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
+                            //                                 <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' />
+                            //                             </svg>
+                            //                         </div>
+                            //                     </div>
+                            //                   </td>";
+                            // echo "</tr>";
                         }
                     ?>
                 </table>
