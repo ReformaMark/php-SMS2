@@ -108,7 +108,7 @@ $recentPayment = getLatestPaymentAmount($payments)
                         <p>₱ <?php echo number_format($balance, 2); ?></p>
                     </div>
                     <div class="bg-white shadow-sm rounded-lg p-5">
-                        <h2 class="text-xl font-semibold text-blue-800 mb-4">Next Payment Due </h2>
+                        <h2 class="text-xl font-semibold text-blue-800 mb-4">Recent Payment Due </h2>
                         <p><?php echo date("F j, Y", strtotime($nextDue)); ?></p>
                        
                     </div>

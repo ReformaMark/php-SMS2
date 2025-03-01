@@ -38,6 +38,9 @@ function getLatestDueDate($transactions) {
 
     foreach ($transactions as $transaction) {
         if (isset($transaction['due_date']) && !empty($transaction['due_date'])) {
+            if ($transaction['due_date'] === '0000-00-00') {
+                return '-';
+            }
             $dueDate = strtotime($transaction['due_date']);
 
             if ($latestDate === null || $dueDate > $latestDate) {
