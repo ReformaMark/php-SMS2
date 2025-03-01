@@ -87,7 +87,7 @@ declare(strict_types=1);
         echo 
         '<a href="../layouts/enrollments.php" class="w-full flex items-center gap-x-3 bg-blue-500 translate-x-5 pl-5 rounded-l-full text-white transition-all duration-500 ease-linear font-normal text-lg  border-b p-1">
             <svg class="size-5" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><rect fill="none" height="256" width="256"/><path fill="currentColor" d="M226.5,56.4l-96-32a8.5,8.5,0,0,0-5,0l-95.9,32h-.2l-1,.5h-.1l-1,.6c0,.1-.1.1-.2.2l-.8.7h0l-.7.8c0,.1-.1.1-.1.2l-.6.9c0,.1,0,.1-.1.2l-.4.9h0l-.3,1.1v.3A3.7,3.7,0,0,0,24,64v80a8,8,0,0,0,16,0V75.1L73.6,86.3A63.2,63.2,0,0,0,64,120a64,64,0,0,0,30,54.2,96.1,96.1,0,0,0-46.5,37.4,8.1,8.1,0,0,0,2.4,11.1,7.9,7.9,0,0,0,11-2.3,80,80,0,0,1,134.2,0,8,8,0,0,0,6.7,3.6,7.5,7.5,0,0,0,4.3-1.3,8.1,8.1,0,0,0,2.4-11.1A96.1,96.1,0,0,0,162,174.2,64,64,0,0,0,192,120a63.2,63.2,0,0,0-9.6-33.7l44.1-14.7a8,8,0,0,0,0-15.2ZM128,168a48,48,0,0,1-48-48,48.6,48.6,0,0,1,9.3-28.5l36.2,12.1a8,8,0,0,0,5,0l36.2-12.1A48.6,48.6,0,0,1,176,120,48,48,0,0,1,128,168Z"/></svg>
-            Enrollments
+            Students
         </a>';
     } else {
         echo '<a href="../layouts/enrollments.php" class="w-full flex items-center gap-x-3 pl-3 hover:bg-blue-500 hover:translate-x-5 hover:pl-5 hover:rounded-l-full hover:text-white transition-all duration-500 ease-linear font-normal text-lg  border-b p-1">
@@ -102,7 +102,7 @@ declare(strict_types=1);
             <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm4.52 3.38c-.39-.27-.82-.48-1.27-.65.46-.16.89-.37 1.27-.65C17.48 15.45 20 16.23 20 18v2h2v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
-            Employees
+            Students
         </a>';
     } else {
         echo '
@@ -113,24 +113,6 @@ declare(strict_types=1);
             Employees
         </a>';
     }
-    if(basename($_SERVER['PHP_SELF']) === 'students.php'){
-        echo '
-        <a href="../layouts/students.php" class="w-full flex items-center gap-x-3 bg-blue-500 translate-x-5 pl-5 rounded-l-full text-white transition-all duration-500 ease-linear font-normal text-lg border-b p-1">
-            <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm4.52 3.38c-.39-.27-.82-.48-1.27-.65.46-.16.89-.37 1.27-.65C17.48 15.45 20 16.23 20 18v2h2v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-            Students
-        </a>';
-    } else {
-        echo '
-        <a href="../layouts/students.php" class="w-full flex items-center gap-x-3 pl-3 hover:bg-blue-500 hover:translate-x-5 hover:pl-5 hover:rounded-l-full hover:text-white transition-all duration-500 ease-linear font-normal text-lg border-b p-1">
-            <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm4.52 3.38c-.39-.27-.82-.48-1.27-.65.46-.16.89-.37 1.27-.65C17.48 15.45 20 16.23 20 18v2h2v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-            Students
-        </a>';
-    }
-
     //bi_reports
     // if(basename($_SERVER['PHP_SELF']) === 'bi_reports.php'){
     //     echo 

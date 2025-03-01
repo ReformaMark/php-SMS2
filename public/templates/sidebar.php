@@ -2,7 +2,7 @@
     style="background-color: #212529;"
     class="hidden lg:flex flex-col justify-between pb-5 shadow-md w-1/5 h-custom max-h-screen overflow-hidden text-white"
 >
-    <div class="w-full" style="padding-top: 4rem;">
+    <div class="w-full" style="padding-top: 3.5rem;">
         
           
         <?php include('../Views/sidebar_view.php') ?>
