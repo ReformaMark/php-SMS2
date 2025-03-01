@@ -11,7 +11,7 @@
                 <label for="firstname" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                     <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </label>
-            <input value="'.$_SESSION['register_data']['firstname'].'"  type="text" name="firstname" placeholder="Enter First Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
+            <input value="'.$_SESSION['register_data']['firstname'].'"  type="text" autocomplete="off" name="firstname" placeholder="Enter First Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
             </div>';
         } else {
             echo
@@ -19,7 +19,7 @@
                 <label for="firstname" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                     <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </label>
-            <input type="text" name="firstname" placeholder="Enter First Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
+            <input type="text" autocomplete="off" name="firstname" placeholder="Enter First Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
             </div>';
         }
 
@@ -30,7 +30,7 @@
                 <label for="lastname" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                     <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </label>
-            <input value="'.$_SESSION['register_data']['lastname'].'"  type="text" name="lastname" placeholder="Enter Last Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
+            <input value="'.$_SESSION['register_data']['lastname'].'"  type="text" autocomplete="off" name="lastname" placeholder="Enter Last Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
             </div>';
         } else {
             echo
@@ -38,7 +38,7 @@
                 <label for="lastname" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                     <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </label>
-            <input type="text" name="lastname" placeholder="Enter Last Name" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
+            <input type="text" name="lastname" placeholder="Enter Last Name" autocomplete="off" pattern="^[a-zA-Z.-]+$" title="Only letters, dots, and hyphens are allowed" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500" required/>
             </div>';
         }
 
@@ -51,7 +51,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                     </svg>
                 </label>
-            <input value="'.$_SESSION['register_data']['email'].'"  type="email" name="email" placeholder="Enter Email" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
+            <input value="'.$_SESSION['register_data']['email'].'"  type="email" autocomplete="off" name="email" placeholder="Enter Email" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
             </div>';
         } else {
             echo
@@ -61,7 +61,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                     </svg>
                 </label>
-            <input type="email" name="email" placeholder="Enter Email" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
+            <input type="email" name="email" placeholder="Enter Email" autocomplete="off" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
             </div>';
         }
 
@@ -72,7 +72,7 @@
                 <label for="username" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                     <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </label>
-            <input value="'.$_SESSION['register_data']['username'].'"  type="text" name="username" placeholder="Enter Student ID" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
+            <input value="'.$_SESSION['register_data']['username'].'"  type="text" autocomplete="off" name="username" placeholder="Enter Student ID" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
             </div>';
         } else {
             echo
@@ -80,7 +80,7 @@
                 <label for="username" class="absolute left-1 top-[50%] translate-y-[-50%] transition-all ease-in duration-300 text-gray-500 focus:text-blue-500 border-r pr-1 border-gray-300">
                     <svg class="feather feather-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </label>
-            <input type="text" name="username" placeholder="Enter Student ID" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
+            <input type="text" name="username" placeholder="Enter Student ID" autocomplete="off" class="w-full px-2 pl-10 py-2 rounded-lg outline-none transition-all ease-in duration-300 bg-gray-100/50 focus:outline-none border-b-2 border-gray-200 focus:border-b-blue-500"/>
             </div>';
         }
 
@@ -94,7 +94,7 @@
                     </svg>
                 </label>
 
-                <input value="'.$_SESSION['register_data']["password"] .'" type="password" id="password" name="password" placeholder="Enter password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
+                <input value="'.$_SESSION['register_data']["password"] .'" type="password" autocomplete="off" id="password" name="password" placeholder="Enter password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
                 
                 <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 tooltip-trigger">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -121,7 +121,7 @@
                     </svg>
                 </label>
 
-                <input  type="password" id="password" name="password" placeholder="Enter password" class="w-full rounded-lg border-b-2  border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
+                <input  type="password" id="password" name="password" autocomplete="off" placeholder="Enter password" class="w-full rounded-lg border-b-2  border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
                 
                 <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 tooltip-trigger">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -154,7 +154,7 @@
                     </svg>
                 </label>
 
-                <input value="'.$_SESSION['register_data']['cpassword'].'" type="password" id="cpassword" name="cpassword" placeholder="Confirm password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
+                <input value="'.$_SESSION['register_data']['cpassword'].'" type="password" autocomplete="off" id="cpassword" name="cpassword" placeholder="Confirm password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
             </div>';
         } else{
             echo
@@ -165,7 +165,7 @@
                     </svg>
                 </label>
 
-                <input type="password" id="cpassword" name="cpassword" placeholder="Confirm password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
+                <input type="password" id="cpassword" name="cpassword" autocomplete="off" placeholder="Confirm password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
             </div>';
         }
     }
