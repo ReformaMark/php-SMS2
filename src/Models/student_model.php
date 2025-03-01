@@ -106,26 +106,35 @@ function getStudentFinancialTransactions(object $pdo, int $user_id, int $limit =
 function fetchStudents(object $pdo, ?string $filter, int $offset, int $limit, bool $isArchived) {
     try {
         $query = "SELECT * FROM users WHERE role = 'Student' AND is_archived = :is_archived";
+        $params = [':is_archived' => $isArchived];
+        
         if ($filter) {
-            $query .= " AND (first_name LIKE :filter OR last_name LIKE :filter OR email LIKE :filter)";
+            $query .= " AND (first_name LIKE :name_filter OR last_name LIKE :name_filter OR email LIKE :name_filter)";
+            $params[':name_filter'] = "%$filter%";
         }
-        $query .= " LIMIT :offset, :limit";
+
+        if (isset($_GET['course']) && !empty($_GET['course'])) {
+            $query .= " AND course = :course";
+            $params[':course'] = $_GET['course'];
+        }
+
+        $query .= " ORDER BY user_id DESC LIMIT :offset, :limit";
         
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":is_archived", $isArchived, PDO::PARAM_BOOL);
-        if ($filter) {
-            $filterParam = "%$filter%";
-            $stmt->bindParam(":filter", $filterParam, PDO::PARAM_STR);
+        
+        foreach ($params as $key => &$value) {
+            $stmt->bindParam($key, $value);
         }
-        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
-        $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        
         $stmt->execute();
-
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
     } catch (PDOException $e) {
         error_log("Database error in fetchStudents: " . $e->getMessage());
-        return null;
+        return [];
     }
 }
 
@@ -134,28 +143,42 @@ function fetchStudents(object $pdo, ?string $filter, int $offset, int $limit, bo
 
 
 
-function archiveStudent(object $pdo, int $student_id) {
+function getStudentById(object $pdo, int $studentId): ?array {
     try {
-        $query = "UPDATE users SET is_archived = TRUE WHERE user_id = :student_id AND role = 'Student'";
+        $query = "SELECT * FROM users WHERE user_id = ? AND role = 'Student'";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":student_id", $student_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount() > 0;
+        $stmt->execute([$studentId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     } catch (PDOException $e) {
-        error_log("Database error in archiveStudent: " . $e->getMessage());
-        throw new Exception("Database error occurred.");
+        error_log("Database error in getStudentById: " . $e->getMessage());
+        return null;
     }
 }
 
-function recoverStudent(object $pdo, int $student_id) {
+function archiveStudent(object $pdo, int $studentId): bool {
     try {
-        $query = "UPDATE users SET is_archived = FALSE WHERE user_id = :student_id AND role = 'Student'";
+        $query = "UPDATE users 
+                  SET is_archived = TRUE, status = 'Inactive' 
+                  WHERE user_id = ? AND role = 'Student'";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":student_id", $student_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt->execute([$studentId]);
+        return $stmt->rowCount() > 0;
+    } catch (PDOException $e) {
+        error_log("Database error in archiveStudent: " . $e->getMessage());
+        return false;
+    }
+}
+
+function recoverStudent(object $pdo, int $studentId): bool {
+    try {
+        $query = "UPDATE users 
+                  SET is_archived = FALSE, status = 'Active' 
+                  WHERE user_id = ? AND role = 'Student'";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$studentId]);
         return $stmt->rowCount() > 0;
     } catch (PDOException $e) {
         error_log("Database error in recoverStudent: " . $e->getMessage());
-        throw new Exception("Database error occurred.");
+        return false;
     }
 }

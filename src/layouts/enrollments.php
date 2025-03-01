@@ -60,10 +60,36 @@
                 <button class="tab px-2 py-1 lg:px-4 lg:py-2 bg-gray-200 text-gray-700 rounded-t-lg text-sm lg:text-base">Archived Students</button>
             </div>
 
-            <!-- Search Form -->
             <form action="" method="get" class="grid grid-cols-1 lg:grid-cols-12 items-center mb-5">
                 <h1 class="text-lg font-semibold col-span-1 lg:col-span-9 mb-2 lg:mb-0">Student lists</h1>
                 <div class="flex flex-col lg:flex-row justify-end items-center gap-y-2 lg:gap-x-5 col-span-1 lg:col-span-3">
+                    <!-- Course Filter -->
+                    <select name="course" class="w-full lg:w-auto mt-1 block h-10 py-1 px-2 border bg-gray-50 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500">
+                        <option value="">All Courses</option>
+                        <option value="BSP" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSP' ? 'selected' : ''; ?>>BSP - BS Psychology</option>
+                        <option value="BSIT" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSIT' ? 'selected' : ''; ?>>BSIT - BS Information Technology</option>
+                        <option value="BSTM" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSTM' ? 'selected' : ''; ?>>BSTM - BS Tourism Management</option>
+                        <option value="BSHM" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSHM' ? 'selected' : ''; ?>>BSHM - BS Hospitality Management</option>
+                        <option value="BSOA" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSOA' ? 'selected' : ''; ?>>BSOA - BS Office Administration</option>
+                        <option value="BSBA Major in Human Resource Management" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSBA Major in Human Resource Management' ? 'selected' : ''; ?>>BSBA - Major in Human Resource Management</option>
+                        <option value="BSBA Major in Marketing" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSBA Major in Marketing' ? 'selected' : ''; ?>>BSBA - Major in Marketing</option>
+                        <option value="BSCrim" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSCrim' ? 'selected' : ''; ?>>BSCrim - BS Criminology</option>
+                        <option value="BLIS" <?php echo isset($_GET['course']) && $_GET['course'] === 'BLIS' ? 'selected' : ''; ?>>BLIS - Bachelor in Library and Information Science</option>
+                        <option value="BEEd" <?php echo isset($_GET['course']) && $_GET['course'] === 'BEEd' ? 'selected' : ''; ?>>BEEd - Bachelor of Elementary Education</option>
+                        <option value="BPEd" <?php echo isset($_GET['course']) && $_GET['course'] === 'BPEd' ? 'selected' : ''; ?>>BPEd - Bachelor of Physical Education</option>
+                        <option value="BTTE" <?php echo isset($_GET['course']) && $_GET['course'] === 'BTTE' ? 'selected' : ''; ?>>BTTE - Bachelor of Technical Teacher Education</option>
+                        <option value="BTLED" <?php echo isset($_GET['course']) && $_GET['course'] === 'BTLED' ? 'selected' : ''; ?>>BTLED - Bachelor of Technology and Livelihood Education</option>
+                        <option value="BSEd Major in English" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSEd Major in English' ? 'selected' : ''; ?>>BSEd - Major in English</option>
+                        <option value="BSEd Major in Filipino" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSEd Major in Filipino' ? 'selected' : ''; ?>>BSEd - Major in Filipino</option>
+                        <option value="BSEd Major in Mathematics" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSEd Major in Mathematics' ? 'selected' : ''; ?>>BSEd - Major in Mathematics</option>
+                        <option value="BSEd Major in Social Science" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSEd Major in Social Science' ? 'selected' : ''; ?>>BSEd - Major in Social Science</option>
+                        <option value="BSEd Major in Values Education" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSEd Major in Values Education' ? 'selected' : ''; ?>>BSEd - Major in Values Education</option>
+                        <option value="BSEd Major in Biological Science" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSEd Major in Biological Science' ? 'selected' : ''; ?>>BSEd - Major in Biological Science</option>
+                        <option value="BSCpE" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSCpE' ? 'selected' : ''; ?>>BSCpE - BS Computer Engineering</option>
+                        <option value="BSENTREP" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSENTREP' ? 'selected' : ''; ?>>BSENTREP - BS Entrepreneurship</option>
+                        <option value="BSAIS" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSAIS' ? 'selected' : ''; ?>>BSAIS - BS Accounting Information Systems</option>
+                        <option value="BSAcT" <?php echo isset($_GET['course']) && $_GET['course'] === 'BSAcT' ? 'selected' : ''; ?>>BSAcT - BS Accounting Technology</option>
+                    </select>
                     <input type="text" placeholder="Search name, id, email" id="search" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" class="w-full lg:w-auto mt-1 block h-10 py-1 px-2 border bg-gray-50 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 p-2" />
                     <button type="submit" class='w-full lg:w-auto px-2 py-1 bg-blue-700 rounded-lg text-white hover:bg-blue-500'>Search</button>
                 </div>
@@ -79,8 +105,9 @@
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Student ID</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Full Name</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Email</th>';
-                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
-                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Course</th>';
+                        // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
+                        // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Status</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Actions</th>';
                         echo '</tr></thead><tbody>';
@@ -93,15 +120,15 @@
                 <!-- Pagination -->
                 <div class="flex justify-center mt-4 space-x-1">
                     <?php if ($page_no > 1): ?>
-                        <a href="?page_no=<?php echo $prev_page; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Prev</a>
+                        <a href="?page_no=<?php echo $prev_page; ?>&course=<?php echo isset($_GET['course']) ? $_GET['course'] : ''; ?>&search=<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Prev</a>
                     <?php endif; ?>
 
                     <?php for ($counter = 1; $counter <= $total_number_of_pages; $counter++): ?>
-                        <a href="?page_no=<?php echo $counter; ?>" class="px-2 py-1 lg:px-3 lg:py-1 <?php echo $counter == $page_no ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base"><?php echo $counter; ?></a>
+                        <a href="?page_no=<?php echo $counter; ?>&course=<?php echo isset($_GET['course']) ? $_GET['course'] : ''; ?>&search=<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>" class="px-2 py-1 lg:px-3 lg:py-1 <?php echo $counter == $page_no ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base"><?php echo $counter; ?></a>
                     <?php endfor; ?>
 
                     <?php if ($page_no < $total_number_of_pages): ?>
-                        <a href="?page_no=<?php echo $next_page; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Next</a>
+                        <a href="?page_no=<?php echo $next_page; ?>&course=<?php echo isset($_GET['course']) ? $_GET['course'] : ''; ?>&search=<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>" class="px-2 py-1 lg:px-3 lg:py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white text-sm lg:text-base">Next</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -116,8 +143,9 @@
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Student ID</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Full Name</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Email</th>';
-                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
-                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Course</th>';
+                        // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
+                        // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Status</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Actions</th>';
                         echo '</tr></thead><tbody>';
@@ -231,37 +259,40 @@
 
         confirmActionBtn.addEventListener('click', function() {
             if (currentStudentId && currentAction) {
-        fetch('../../src/Controllers/manage_student_archive.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `student_id=${currentStudentId}&action=${currentAction}`
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const formData = new FormData();
+                formData.append('student_id', currentStudentId);
+                formData.append('action', currentAction);
+
+                fetch('../../src/Controllers/manage_student_archive.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => Promise.reject(err));
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        actionDialog.classList.add('hidden');
+                        // Add small delay to ensure notification is created
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500);
+                    } else {
+                        throw new Error(data.message || `Failed to ${currentAction} student`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // alert(error.message || `An error occurred while ${currentAction}ing the student`);
+                })
+                .finally(() => {
+                    actionDialog.classList.add('hidden');
+                });
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            } else {
-                alert(`Error ${currentAction}ing student: ${data.message || 'Unknown error'}`);
-            }
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-            // Don't show the default error message since archiving/recovery was successful
-            if (!error.message.includes('Unexpected token')) {
-                alert(`An error occurred while ${currentAction}ing the student.`);
-            }
-            location.reload(); // Reload the page since the action was likely successful
         });
-    }
-    actionDialog.classList.add('hidden');
-});
     });
     </script>
 </body>

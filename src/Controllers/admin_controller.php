@@ -2,6 +2,43 @@
 declare(strict_types=1);
 
 require_once "../Models/admin_model.php";
+require_once "../Models/notification_model.php";
+
+function createAdminNotification(object $pdo, string $actionType, array $adminData): void {
+    try {
+        $title = '';
+        $message = '';
+        $type = 'success';
+        
+        switch ($actionType) {
+            case 'create':
+                $title = 'New Administrator Added';
+                $message = "Successfully added {$adminData['first_name']} {$adminData['last_name']} as administrator";
+                break;
+            case 'update':
+                $title = 'Administrator Updated';
+                $message = "Successfully updated administrator {$adminData['first_name']} {$adminData['last_name']}";
+                break;
+            case 'archive':
+                $title = 'Administrator Archived';
+                $message = "Administrator {$adminData['first_name']} {$adminData['last_name']} has been archived";
+                break;
+            case 'unarchive':
+                $title = 'Administrator Activated';
+                $message = "Administrator {$adminData['first_name']} {$adminData['last_name']} has been activated";
+                break;
+        }
+        
+        createNotification($pdo, [
+            'user_id' => $_SESSION['user_id'],
+            'title' => $title,
+            'message' => $message,
+            'type' => $type
+        ]);
+    } catch (Exception $e) {
+        error_log("Error creating notification: " . $e->getMessage());
+    }
+}
 
 function isValidAdminData(object $pdo, array $data, ?int $adminId = null) {
     $errors = [];
@@ -35,28 +72,19 @@ function isValidAdminData(object $pdo, array $data, ?int $adminId = null) {
 }
 
 function handleAdminCreation(object $pdo, array $data) {
-    // Validate the data
     $errors = isValidAdminData($pdo, $data);
     if (!empty($errors)) {
         return ['success' => false, 'errors' => $errors];
     }
     
-    // Create the admin
-    $adminData = [
-        'username' => $data['username'],
-        'email' => $data['email'],
-        'first_name' => $data['first_name'],
-        'last_name' => $data['last_name'],
-        'password' => $data['password']
-    ];
-    
-    $result = createAdmin($pdo, $adminData);
+    $result = createAdmin($pdo, $data);
     
     if ($result) {
+        createAdminNotification($pdo, 'create', $data);
         return ['success' => true];
-    } else {
-        return ['success' => false, 'message' => 'Failed to create administrator'];
     }
+    
+    return ['success' => false, 'message' => 'Failed to create administrator'];
 }
 
 function handleAdminUpdate(object $pdo, int $adminId, array $data) {
@@ -65,20 +93,14 @@ function handleAdminUpdate(object $pdo, int $adminId, array $data) {
         return ['success' => false, 'errors' => $errors];
     }
     
-    $adminData = [
-        'username' => $data['username'],
-        'email' => $data['email'],
-        'first_name' => $data['first_name'],
-        'last_name' => $data['last_name']
-    ];
+    $result = updateAdmin($pdo, $adminId, $data);
     
-    // Only include password if it's provided
-    if (!empty($data['password'])) {
-        $adminData['password'] = $data['password'];
+    if ($result) {
+        createAdminNotification($pdo, 'update', $data);
+        return ['success' => true];
     }
     
-    $result = updateAdmin($pdo, $adminId, $adminData);
-    return ['success' => $result];
+    return ['success' => false, 'message' => 'Failed to update administrator'];
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -110,13 +132,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = handleAdminUpdate($pdo, (int)$input['admin_id'], $input);
                 break;
                 
-            case 'toggle_status':
-                if (!isset($input['admin_id'])) {
-                    $result = ['success' => false, 'message' => 'Admin ID is required'];
+                case 'toggle_status':
+                    if (!isset($input['admin_id'])) {
+                        $result = ['success' => false, 'message' => 'Admin ID is required'];
+                        break;
+                    }
+                    $admin = getAdminById($pdo, (int)$input['admin_id']);
+                    if ($admin) {
+                        $success = toggleAdminStatus($pdo, (int)$input['admin_id']);
+                        if ($success) {
+                            createAdminNotification($pdo, $admin['is_archived'] ? 'unarchive' : 'archive', $admin);
+                        }
+                        $result = ['success' => $success];
+                    } else {
+                        $result = ['success' => false, 'message' => 'Admin not found'];
+                    }
                     break;
-                }
-                $result = ['success' => toggleAdminStatus($pdo, (int)$input['admin_id'])];
-                break;
                 
             case 'get':
                 if (!isset($input['admin_id'])) {

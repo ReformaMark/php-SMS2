@@ -87,3 +87,23 @@ function getCountStudents(PDO $pdo) {
         return "N/A";
     }
 }
+
+function getStudentStatusDistribution(PDO $pdo): array {
+    try {
+        $query = "SELECT 
+            SUM(CASE WHEN is_archived = 0 THEN 1 ELSE 0 END) as active_count,
+            SUM(CASE WHEN is_archived = 1 THEN 1 ELSE 0 END) as inactive_count
+            FROM users 
+            WHERE role = 'Student'";
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error getting student status distribution: " . $e->getMessage());
+        return [
+            'active_count' => 0,
+            'inactive_count' => 0
+        ];
+    }
+}

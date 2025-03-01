@@ -32,9 +32,10 @@ function getEmail(object $pdo, string $email) {
     }
 }
 
-function setUser(object $pdo, string $firstname, string $lastname, string $email, string $username, string $password_hash, string $role) {
+function setUser(object $pdo, string $firstname, string $middlename, string $lastname, string $email, string $username, string $password_hash, string $role, ?string $course = null): void {
     try {
-        $query = "INSERT INTO users (first_name, last_name, email, username, password_hash, role) VALUES (:firstname, :lastname, :email, :username, :password_hash, :role);";
+        $query = "INSERT INTO users (first_name, middle_name, last_name, email, username, password_hash, role, course) 
+                  VALUES (:firstname, :middlename, :lastname, :email, :username, :password_hash, :role, :course);";
         
         $stmt = $pdo->prepare($query);
 
@@ -45,11 +46,13 @@ function setUser(object $pdo, string $firstname, string $lastname, string $email
         $hashed_password = password_hash($password_hash, PASSWORD_BCRYPT, $options);
         
         $stmt->bindParam(":firstname", $firstname);
+        $stmt->bindParam(":middlename", $middlename);
         $stmt->bindParam(":lastname", $lastname);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":username", $username);
         $stmt->bindParam(":password_hash", $hashed_password);
         $stmt->bindParam(":role", $role);
+        $stmt->bindParam(":course", $course, PDO::PARAM_STR);
         
         $stmt->execute();
     } catch (PDOException $e) {
