@@ -1,11 +1,17 @@
 <?php
     require_once "../config_session.php";
     require_once "../Models/enrollments_model.php";
+    require_once "../../data/mock_transactions.php";
+
     if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'Admin'){
         header("Location: ../../index.php");
         die();
     }
 
+    $outstandingAccounts = array_filter($mockTransactions, function($transaction) {
+        return in_array($transaction['status'], ['Pending', 'Partially Paid', 'Overdue']);
+    });
+    
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +54,6 @@
                     <h3 class="text-xl font-semibold text-blue-800 mb-4">
                         Total Student Accounts
                     </h3>
-
                     <p class="text-4xl font-bold text-blue-600">
                         <?php 
                             require_once "../dbh.php";
@@ -63,7 +68,13 @@
                         Accounts with Outstanding Balance
                     </h3>
                     <p class="text-4xl font-bold text-yellow-600">
-                        1,287
+                        <?php
+                            // Count transactions with Pending, Partially Paid, or Overdue status
+                            $outstandingAccounts = array_filter($mockTransactions, function($transaction) {
+                                return in_array($transaction['status'], ['Pending', 'Partially Paid', 'Overdue']);
+                            });
+                            echo count($outstandingAccounts);
+                        ?>
                     </p>
                 </div>
 
@@ -72,7 +83,13 @@
                         Total Outstanding Balance
                     </h3>
                     <p class="text-4xl font-bold text-red-600">
-                        ₱26,172,500
+                        <?php
+                            // Sum amounts from transactions with outstanding balances
+                            $totalOutstanding = array_reduce($outstandingAccounts, function($carry, $transaction) {
+                                return $carry + floatval($transaction['amount']);
+                            }, 0);
+                            echo '₱' . number_format($totalOutstanding, 2);
+                        ?>
                     </p>
                 </div>
             </div>
