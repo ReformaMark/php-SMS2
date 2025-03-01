@@ -8,7 +8,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $dbPassword = "";              
 } else {
     // Production environment
-    $host = "localhost";
+    $host = "157.173.111.118";
     $dbName = "mis_ledger";
     $dbUsername = "mis_ledger";
     $dbPassword= "v6IA^3kJ3w0N#bC0";
