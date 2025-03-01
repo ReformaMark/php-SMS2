@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $cpassword = $_POST['cpassword'] ?? '';
+    $course = $_POST['course'] ?? null;
 
     try {
         require_once "dbh.php";
@@ -78,8 +79,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 "email" => $email,
                 "username" => $username,
                 "password" => $password,
-                "cpassword" => $cpassword
+                "cpassword" => $cpassword,
+                "course" => $course
             ];
+            
 
             $_SESSION['register_data'] = $registerData;
 
@@ -97,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Set default role to 'Student'
             $role = 'Student';
-            createUser($pdo, $firstname, $middlename, $lastname, $email, $username, $password, $role);
+            createUser($pdo, $firstname, $middlename, $lastname, $email, $username, $password, $role, $course);
 
             header("Location: ./layouts/register.php?register=success");
             $pdo = null;

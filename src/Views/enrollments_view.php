@@ -16,6 +16,7 @@ if (!function_exists('displayStudents')) {
                 echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['email']) . '</td>';
                 // echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['phone_number']) . '</td>';
                 // echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['enrollment_date']) . '</td>';
+                echo '<td class="py-3 px-6 text-center hidden lg:table-cell">' . htmlspecialchars((string)$student['course'] ?? 'Not Assigned') . '</td>';
                 
                 // Style the status
                 $statusClass = '';

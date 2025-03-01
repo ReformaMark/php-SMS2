@@ -16,7 +16,7 @@
     <title>MIS Dashboard</title>
     <link href="../../output.css" rel="stylesheet" >
     <link rel="stylesheet" href="../../public/css/styles.css">
-    <script src="../../node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100 min-h-[80vh] flex flex-col justify-between">
     <!-- Navigation bar -->

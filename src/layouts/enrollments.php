@@ -79,6 +79,7 @@
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Student ID</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Full Name</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Email</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Course</th>';
                         // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
                         // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Status</th>';
@@ -116,6 +117,7 @@
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Student ID</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Full Name</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Email</th>';
+                        echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Course</th>';
                         // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Phone No.</th>';
                         // echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center hidden lg:table-cell">Enrollment Date</th>';
                         echo '<th class="py-2 px-3 lg:py-3 lg:px-6 text-center">Status</th>';

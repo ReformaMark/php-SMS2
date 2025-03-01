@@ -205,6 +205,40 @@
                 <input type="password" id="cpassword" name="cpassword" autocomplete="off" placeholder="Confirm password" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 pr-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
             </div>';
         }
+
+        echo '<div class="relative mb-5 w-full">
+            <label for="course" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                </svg>
+            </label>
+            <select name="course" class="w-full rounded-lg border-b-2 border-gray-200 bg-gray-100/50 px-2 py-2 pl-10 outline-none transition-all duration-300 ease-in focus:border-b-blue-500 focus:outline-none">
+                <option value="">Select Course (Optional)</option>
+                <option value="BSP" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSP" ? "selected" : "") . '>BSP - BS Psychology</option>
+                <option value="BSIT" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSIT" ? "selected" : "") . '>BSIT - BS Information Technology</option>
+                <option value="BSTM" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSTM" ? "selected" : "") . '>BSTM - BS Tourism Management</option>
+                <option value="BSHM" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSHM" ? "selected" : "") . '>BSHM - BS Hospitality Management</option>
+                <option value="BSOA" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSOA" ? "selected" : "") . '>BSOA - BS Office Administration</option>
+                <option value="BSBA Major in Human Resource Management" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSBA Major in Human Resource Management" ? "selected" : "") . '>BSBA - Major in Human Resource Management</option>
+                <option value="BSBA Major in Marketing" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSBA Major in Marketing" ? "selected" : "") . '>BSBA - Major in Marketing</option>
+                <option value="BSCrim" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSCrim" ? "selected" : "") . '>BSCrim - BS Criminology</option>
+                <option value="BLIS" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BLIS" ? "selected" : "") . '>BLIS - Bachelor in Library and Information Science</option>
+                <option value="BEEd" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BEEd" ? "selected" : "") . '>BEEd - Bachelor of Elementary Education</option>
+                <option value="BPEd" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BPEd" ? "selected" : "") . '>BPEd - Bachelor of Physical Education</option>
+                <option value="BTTE" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BTTE" ? "selected" : "") . '>BTTE - Bachelor of Technical Teacher Education</option>
+                <option value="BTLED" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BTLED" ? "selected" : "") . '>BTLED - Bachelor of Technology and Livelihood Education</option>
+                <option value="BSEd Major in English" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSEd Major in English" ? "selected" : "") . '>BSEd - Major in English</option>
+                <option value="BSEd Major in Filipino" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSEd Major in Filipino" ? "selected" : "") . '>BSEd - Major in Filipino</option>
+                <option value="BSEd Major in Mathematics" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSEd Major in Mathematics" ? "selected" : "") . '>BSEd - Major in Mathematics</option>
+                <option value="BSEd Major in Social Science" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSEd Major in Social Science" ? "selected" : "") . '>BSEd - Major in Social Science</option>
+                <option value="BSEd Major in Values Education" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSEd Major in Values Education" ? "selected" : "") . '>BSEd - Major in Values Education</option>
+                <option value="BSEd Major in Biological Science" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSEd Major in Biological Science" ? "selected" : "") . '>BSEd - Major in Biological Science</option>
+                <option value="BSCpE" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSCpE" ? "selected" : "") . '>BSCpE - BS Computer Engineering</option>
+                <option value="BSENTREP" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSENTREP" ? "selected" : "") . '>BSENTREP - BS Entrepreneurship</option>
+                <option value="BSAIS" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSAIS" ? "selected" : "") . '>BSAIS - BS Accounting Information Systems</option>
+                <option value="BSAcT" ' . (isset($_SESSION["register_data"]["course"]) && $_SESSION["register_data"]["course"] === "BSAcT" ? "selected" : "") . '>BSAcT - BS Accounting Technology</option>
+            </select>
+        </div>';
     }
 
     function checkRegisterErrors(){
