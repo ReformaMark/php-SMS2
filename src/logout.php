@@ -5,5 +5,5 @@ session_start();
 session_unset();
 session_destroy();
 
-header("Location: " . "schoolmanagementsystem2.com" . "/login.php");
+header("Location: https://schoolmanagementsystem2.com/login.php");
 exit();
