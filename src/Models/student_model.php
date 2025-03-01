@@ -149,7 +149,7 @@ function getStudentById(object $pdo, int $studentId): ?array {
 function archiveStudent(object $pdo, int $studentId): bool {
     try {
         $query = "UPDATE users 
-                  SET is_archived = TRUE 
+                  SET is_archived = TRUE, status = 'Inactive' 
                   WHERE user_id = ? AND role = 'Student'";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$studentId]);
@@ -163,7 +163,7 @@ function archiveStudent(object $pdo, int $studentId): bool {
 function recoverStudent(object $pdo, int $studentId): bool {
     try {
         $query = "UPDATE users 
-                  SET is_archived = FALSE 
+                  SET is_archived = FALSE, status = 'Active' 
                   WHERE user_id = ? AND role = 'Student'";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$studentId]);

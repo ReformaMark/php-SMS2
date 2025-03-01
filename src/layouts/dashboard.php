@@ -180,68 +180,133 @@
                     <canvas id="accountStatusChart"></canvas>
                 </div> -->
             </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-4">Student Status Distribution</h3>
+                <?php 
+                    $studentDistribution = getStudentStatusDistribution($pdo);
+                ?>
+                <div class="flex justify-between mb-4">
+                    <div class="text-center">
+                        <span class="block text-2xl font-bold text-green-600">
+                            <?php echo $studentDistribution['active_count']; ?>
+                        </span>
+                        <span class="text-sm text-gray-600">Active Students</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-2xl font-bold text-red-600">
+                            <?php echo $studentDistribution['inactive_count']; ?>
+                        </span>
+                        <span class="text-sm text-gray-600">Dropped Students</span>
+                    </div>
+                </div>
+                <div style="width: 100%; max-width: 28rem; margin-left: auto; margin-right: auto; height: 300px;">
+                    <canvas id="studentDistributionChart"></canvas>
+                </div>
+            </div>
         </main>
     </div>
 
-    <!-- <script>
+    <script>
         // Monthly Financial Trend Chart
-        const financialTrendCtx = document.getElementById('financialTrendChart').getContext('2d');
-        new Chart(financialTrendCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [
-                    {
-                        label: 'Payments Received',
-                        data: [3250000, 2950000, 4000000, 4050000, 2800000, 2750000],
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    },
-                    {
-                        label: 'Charges Applied',
-                        data: [3500000, 3100000, 3750000, 4250000, 2900000, 3000000],
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value, index, values) {
-                                return '₱' + (value / 1000000).toFixed(1) + 'M';
+        // const financialTrendCtx = document.getElementById('financialTrendChart').getContext('2d');
+        // new Chart(financialTrendCtx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        //         datasets: [
+        //             {
+        //                 label: 'Payments Received',
+        //                 data: [3250000, 2950000, 4000000, 4050000, 2800000, 2750000],
+        //                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        //             },
+        //             {
+        //                 label: 'Charges Applied',
+        //                 data: [3500000, 3100000, 3750000, 4250000, 2900000, 3000000],
+        //                 backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        //             }
+        //         ]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true,
+        //                 ticks: {
+        //                     callback: function(value, index, values) {
+        //                         return '₱' + (value / 1000000).toFixed(1) + 'M';
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // });
+
+        // Student Account Status Pie Chart
+        // const accountStatusCtx = document.getElementById('accountStatusChart').getContext('2d');
+        // new Chart(accountStatusCtx, {
+        //     type: 'pie',
+        //     data: {
+        //         labels: ['Paid', 'Partially Paid', 'Overdue'],
+        //         datasets: [{
+        //             data: [3000, 1500, 734],
+        //             backgroundColor: [
+        //                 'rgba(75, 192, 192, 0.6)',
+        //                 'rgba(255, 206, 86, 0.6)',
+        //                 'rgba(255, 99, 132, 0.6)'
+        //             ]
+        //         }]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         plugins: {
+        //             legend: {
+        //                 position: 'bottom',
+        //             }
+        //         }
+        //     }
+        // });
+
+        const studentDistributionCtx = document.getElementById('studentDistributionChart').getContext('2d');
+            new Chart(studentDistributionCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Active Students', 'Dropped Students'],
+                    datasets: [{
+                        data: [
+                            <?php echo $studentDistribution['active_count']; ?>,
+                            <?php echo $studentDistribution['inactive_count']; ?>
+                        ],
+                        backgroundColor: [
+                            'rgba(34, 197, 94, 0.6)', // green for active
+                            'rgba(239, 68, 68, 0.6)'  // red for inactive
+                        ],
+                        borderColor: [
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(239, 68, 68, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.raw / total) * 100).toFixed(1);
+                                    return `${context.label}: ${context.raw} (${percentage}%)`;
+                                }
                             }
                         }
                     }
                 }
-            }
-        });
-
-        // Student Account Status Pie Chart
-        const accountStatusCtx = document.getElementById('accountStatusChart').getContext('2d');
-        new Chart(accountStatusCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Paid', 'Partially Paid', 'Overdue'],
-                datasets: [{
-                    data: [3000, 1500, 734],
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(255, 99, 132, 0.6)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                    }
-                }
-            }
-        });
-    </script> -->
+            });
+    </script>
 </body>
 </html>
