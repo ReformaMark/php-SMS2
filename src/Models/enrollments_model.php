@@ -107,3 +107,40 @@ function getStudentStatusDistribution(PDO $pdo): array {
         ];
     }
 }
+
+function getCourseDistribution(PDO $pdo): array {
+    try {
+        $query = "SELECT 
+            course,
+            COUNT(*) as count 
+            FROM users 
+            WHERE role = 'Student' 
+            AND course IS NOT NULL 
+            AND is_archived = 0
+            GROUP BY course 
+            ORDER BY count DESC";
+            
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Format data for chart
+        $courseData = [
+            'labels' => [],
+            'data' => []
+        ];
+        
+        foreach ($results as $row) {
+            $courseData['labels'][] = $row['course'];
+            $courseData['data'][] = (int)$row['count'];
+        }
+        
+        return $courseData;
+    } catch (PDOException $e) {
+        error_log("Error getting course distribution: " . $e->getMessage());
+        return [
+            'labels' => [],
+            'data' => []
+        ];
+    }
+}

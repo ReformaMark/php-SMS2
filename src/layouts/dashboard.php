@@ -116,16 +116,13 @@
                         </thead>
                         <tbody>
                         <?php
-                        // Get the mock transactions array from transactions.php
-                        $mockTransactions = [
-                            ['transaction_id' => 'T015', 'student_id' => 's21013225', 'student_name' => 'Mia', 'student_lastname' => 'Nelson', 'amount' => '7500', 'transaction_type' => 'Debit', 'status' => 'Partially Paid', 'date' => '2023-01-15'],
-                            ['transaction_id' => 'T014', 'student_id' => 's21013224', 'student_name' => 'Leo', 'student_lastname' => 'Miller', 'amount' => '7000', 'transaction_type' => 'Cash', 'status' => 'Paid', 'date' => '2023-01-14'],
-                            ['transaction_id' => 'T013', 'student_id' => 's21013223', 'student_name' => 'Karen', 'student_lastname' => 'Lewis', 'amount' => '6500', 'transaction_type' => 'Debit', 'status' => 'Overdue', 'date' => '2023-01-13'],
-                            ['transaction_id' => 'T012', 'student_id' => 's21013222', 'student_name' => 'Jack', 'student_lastname' => 'King', 'amount' => '6000', 'transaction_type' => 'Cash', 'status' => 'Partially Paid', 'date' => '2023-01-12'],
-                            ['transaction_id' => 'T011', 'student_id' => 's21013221', 'student_name' => 'Ivy', 'student_lastname' => 'Jones', 'amount' => '5500', 'transaction_type' => 'Debit', 'status' => 'Paid', 'date' => '2023-01-11']
-                        ];
+                            $recentTransactions = array_slice(
+                                array_reverse($mockTransactions), 
+                                0, 
+                                5
+                            );
 
-                        foreach ($mockTransactions as $index => $transaction):
+                        foreach ($recentTransactions as $index => $transaction):
                             // Determine status color
                             $statusClass = '';
                             switch ($transaction['status']) {
@@ -200,7 +197,7 @@
                 </div> -->
             </div>
 
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="bg-white rounded-lg shadow p-6 mb-6">
                 <h3 class="text-xl font-semibold text-blue-800 mb-4">Student Status Distribution</h3>
                 <?php 
                     $studentDistribution = getStudentStatusDistribution($pdo);
@@ -223,8 +220,56 @@
                     <canvas id="studentDistributionChart"></canvas>
                 </div>
             </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 mt-3">
+                <!-- Course Distribution Chart -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Students by Course</h3>
+                    <?php 
+                        $courseDistribution = getCourseDistribution($pdo);
+                    ?>
+                    <canvas id="courseDistributionChart"></canvas>
+                </div>
+
+                <!-- Student Account Status -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Payment Status Distribution</h3>
+                    <canvas id="paymentStatusChart"></canvas>
+                </div>
+            </div>
+
+            <!--  -->
         </main>
     </div>
+
+    <?php
+        // Update the payment status calculation
+        $paymentStatusCounts = array_reduce($mockTransactions, function($counts, $transaction) {
+            $status = $transaction['status'];
+            if (!isset($counts[$status])) {
+                $counts[$status] = 0;
+            }
+            $counts[$status]++;
+            return $counts;
+        }, []);
+
+        // Initialize all status types with 0 if they don't exist
+        $preferredOrder = ['Paid', 'Partially Paid', 'Pending', 'Overdue'];
+        $sortedCounts = array_fill_keys($preferredOrder, 0);
+
+        // Merge with actual counts
+        foreach ($paymentStatusCounts as $status => $count) {
+            if (in_array($status, $preferredOrder)) {
+                $sortedCounts[$status] = $count;
+            }
+        }
+
+        // Convert to JSON for JavaScript use
+        $paymentStatusData = json_encode([
+            'labels' => array_keys($sortedCounts),
+            'data' => array_values($sortedCounts)
+        ]);
+    ?>
 
     <script>
         // Monthly Financial Trend Chart
@@ -310,6 +355,93 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.raw / total) * 100).toFixed(1);
+                                    return `${context.label}: ${context.raw} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const courseDistributionCtx = document.getElementById('courseDistributionChart').getContext('2d');
+                new Chart(courseDistributionCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: <?php echo json_encode($courseDistribution['labels']); ?>,
+                        datasets: [{
+                            label: 'Number of Students',
+                            data: <?php echo json_encode($courseDistribution['data']); ?>,
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(153, 102, 255, 0.6)',
+                                'rgba(255, 159, 64, 0.6)',
+                                'rgba(201, 203, 207, 0.6)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Number of students: ${context.raw}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+            const paymentStatusCtx = document.getElementById('paymentStatusChart').getContext('2d');
+            const paymentStatusData = <?php echo $paymentStatusData; ?>;
+
+            new Chart(paymentStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: paymentStatusData.labels,
+                    datasets: [{
+                        data: paymentStatusData.data,
+                        backgroundColor: [
+                            'rgba(34, 197, 94, 0.6)',   // green for Paid
+                            'rgba(234, 179, 8, 0.6)',   // yellow for Partially Paid
+                            'rgba(148, 163, 184, 0.6)', // gray for Pending
+                            'rgba(239, 68, 68, 0.6)'    // red for Overdue
+                        ],
+                        borderColor: [
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(234, 179, 8, 1)',
+                            'rgba(148, 163, 184, 1)',
+                            'rgba(239, 68, 68, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
                     plugins: {
                         legend: {
                             position: 'bottom'

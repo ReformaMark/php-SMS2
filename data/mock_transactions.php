@@ -10,7 +10,7 @@ $mockTransactions = [
                                 'year' => '1st Year',
                                 'section' => 'BSIT-1A', 
                                 'transaction_type' => 'Cash', 
-                                'status' => 'Paid', 
+                                'status' => 'Pending', 
                                 'date' => '2023-01-01'
                             ],
                             [
@@ -23,7 +23,7 @@ $mockTransactions = [
                                 'year' => '2nd Year',
                                 'section' => 'BSP-2A', 
                                 'transaction_type' => 'E-Cash', 
-                                'status' => 'Paid', 
+                                'status' => 'Pending', 
                                 'date' => '2023-01-05'
                             ],
                             [
@@ -62,7 +62,7 @@ $mockTransactions = [
                                 'year' => '1st Year',
                                 'section' => 'BSOA-1C', 
                                 'transaction_type' => 'Cash', 
-                                'status' => 'Pending', 
+                                'status' => 'Partially Paid', 
                                 'date' => '2023-01-15'
                             ],
                             [
@@ -127,7 +127,7 @@ $mockTransactions = [
                                 'year' => '1st Year',
                                 'section' => 'BEEd-1B', 
                                 'transaction_type' => 'Cash', 
-                                'status' => 'Pending', 
+                                'status' => 'Partially Paid', 
                                 'date' => '2023-01-28'
                             ],
                             [
@@ -192,7 +192,7 @@ $mockTransactions = [
                                 'year' => '1st Year',
                                 'section' => 'BSENTREP-1A', 
                                 'transaction_type' => 'Cash', 
-                                'status' => 'Pending', 
+                                'status' => 'Partially Paid', 
                                 'date' => '2023-02-15'
                             ]
                         ];
