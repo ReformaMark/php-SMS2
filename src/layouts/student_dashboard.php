@@ -1,5 +1,9 @@
 <?php
+require_once "../dbh.php";
 require_once "../config_session.php";
+require_once '../Models/transactions_model.php';
+require_once '../Models/payment_model.php';
+require_once '../Controllers/transaction_controller.php';
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'Student') {
     header("Location: ../../index.php");
     die();
@@ -7,6 +11,21 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'Student') {
 
 // Fetch the student's name from the session
 $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student';
+
+// Fetch the student's ID from the session
+$student_id = isset($_SESSION['user_username']) ? $_SESSION['user_username'] : null;
+
+// Fetch transactions for the student
+$transactions = fetchTransactions($pdo, $student_id);
+$payments = fetchPayments($pdo, $student_id);
+
+$recentTransactions = array_slice($transactions, 0, 10); // Get the latest 10 transactions
+
+$balance = calculateTotalBalance($transactions);
+
+$nextDue = getLatestDueDate($transactions);
+
+$recentPayment = getLatestPaymentAmount($payments)
 
 ?>
 
@@ -84,68 +103,180 @@ $studentName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
                     <div class="bg-white shadow-sm rounded-lg p-5">
                         <h2 class="text-xl font-semibold text-blue-800 mb-4">Outstanding Balance</h2>
-                        <p>₱ 0.00</p>
+                        <p>₱ <?php echo number_format($balance, 2); ?></p>
                     </div>
                     <div class="bg-white shadow-sm rounded-lg p-5">
                         <h2 class="text-xl font-semibold text-blue-800 mb-4">Next Payment Due </h2>
-                        <p>- </p>
+                        <p><?php echo date("F j, Y", strtotime($nextDue)); ?></p>
+                       
                     </div>
                     <div class="bg-white shadow-sm rounded-lg p-5">
                         <h2 class="text-xl font-semibold text-blue-800 mb-4">Recent Payment</h2>
-                        <p>₱ 0.00</p>
+                       
+                        <p>₱ <?php echo number_format($recentPayment, 2); ?></p>
                     </div>
                     <div class="bg-white shadow-sm rounded-lg p-5">
                         <h2 class="text-xl font-semibold text-blue-800 mb-4">Recent Charge</h2>
-                        <p>₱ 0.00</p>
+                        <?php
+                            $latestChargeAmount = 0;
+                            foreach ($recentTransactions as $transaction):
+                                if (strtolower($transaction['transaction_type']) === 'charge' && $latestChargeAmount === 0) {
+                                    $latestChargeAmount = $transaction['amount'];
+                                    break; // Exit the loop after finding the first charge
+                                }
+                            endforeach;
+
+                            // Debugging output
+                            if ($latestChargeAmount === 0) {
+                                echo "No recent charges found.";
+                            } else {
+                                echo '₱ ' . number_format($latestChargeAmount, 2);
+                            }
+                        ?>
                     </div>
                
                 </div>
-                <div class="bg-white rounded-lg shadow p-6">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-4">
-                        Your Recent Transactions
-                    </h3>
+                <div class="grid grid-cols-2 gap-x-5">
+                    <div class="bg-white rounded-lg shadow p-4 sm:p-6 ">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Payment Transactions Made</h3>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-blue-100">
+                                    <th class="py-2 px-4 text-left">Date</th>
+                                    <th class="py-2 px-4 text-left">Fee</th>
+                                    <th class="py-2 px-4 text-left">Status</th>
+                                    <th class="py-2 px-4 text-left">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Sample data
+                                $mockPayments = $payments;
 
-                    <div class="mb-4">
-                    <select class="bg-gray-100 border border-gray-300 rounded px-3 py-1">
-                            <option value="all">All Transactions</option>
-                            <option value="payments">Payments</option>
-                            <option value="charges">Charges</option>
-                    </select>
+                                $perPage = 5;
+                                $totalPayments = count($mockPayments);
+                                $totalPages = ceil($totalPayments / $perPage);
+                                $currentPage = isset($_GET['paymentPage']) ? (int)$_GET['paymentPage'] : 1;
+                                $start = ($currentPage - 1) * $perPage;
+                                $payments = array_slice($mockPayments, $start, $perPage);
+                                foreach ($payments as $index => $payments):
+                                ?>
+                                <tr class="<?php echo $index % 2 == 0 ? 'bg-gray-50' : 'bg-white'; ?>">
+                                    <td class="py-2 px-4"><?php echo $payments['date']; ?></td>
+                                    <td class="py-2 px-4"><?php echo $payments['description']; ?></td>
+                                    <td class="py-2 px-4"><?php echo $payments['status']; ?></td>
+                                    <td class="py-2 px-4">₱<?php echo number_format($payments['amount']); ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <!-- Pagination -->
+                        <div class="flex justify-center mt-4 space-x-1">
+                            <?php if ($currentPage > 1): ?>
+                                <a href="?page=<?php echo $currentPage - 1; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Prev</a>
+                            <?php endif; ?>
+
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <a href="?page=<?php echo $i; ?>" class="px-3 py-1 <?php echo $i == $currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white"><?php echo $i; ?></a>
+                            <?php endfor; ?>
+
+                            <?php if ($currentPage < $totalPages): ?>
+                                <a href="?page=<?php echo $currentPage + 1; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Next</a>
+                            <?php endif; ?>
+                        </div>
                     </div>
+                    <div class="bg-white rounded-lg shadow p-4 sm:p-6 ">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Charges & Fees</h3>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-blue-100">
+                                    <th class="py-2 px-4 text-left">Date</th>
+                                    <th class="py-2 px-4 text-left">Fee</th>
+                                    <th class="py-2 px-4 text-left">Due Date</th>
+                                    <th class="py-2 px-4 text-left">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Sample data
+                                $mockCharges = $transactions;
+                                $perPage = 5;
+                                $totalCharges = count($mockCharges);
+                                $totalPages = ceil($totalCharges / $perPage);
+                                $currentPage = isset($_GET['chargesPage']) ? (int)$_GET['chargesPage'] : 1;
+                                $start = ($currentPage - 1) * $perPage;
+                                $charges = array_slice($mockCharges, $start, $perPage);
 
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-blue-100">
-                                <th class="py-2 px-4 text-left">Date</th>
-                                <th class="py-2 px-4 text-left">Type</th>
-                                <th class="py-2 px-4 text-left">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Sample data
-                            $transactions = [
-                                ['date' => '2023-05-01', 'type' => 'Payment', 'amount' => 25000],
-                                ['date' => '2023-05-02', 'type' => 'Charge', 'amount' => 50000],
-                                ['date' => '2023-05-03', 'type' => 'Payment', 'amount' => 37500],
-                                ['date' => '2023-05-04', 'type' => 'Charge', 'amount' => 12500],
-                                ['date' => '2023-05-05', 'type' => 'Payment', 'amount' => 50000],
-                            ];
+                                if (empty($charges)) {
+                                    echo "<tr><td colspan='4' class='text-center py-2 px-4'>No charges found.</td></tr>";
+                                } else {
+                                    foreach ($charges as $index => $charge):
+                                        ?>
+                                        <tr class="<?php echo $index % 2 == 0 ? 'bg-gray-50' : 'bg-white'; ?>">
+                                            <td class="py-2 px-4"><?php echo $charge['date']; ?></td>
+                                            <td class="py-2 px-4"><?php echo $charge['description']; ?></td>
+                                            <td class="py-2 px-4"><?php echo $charge['due_date']; ?></td>
+                                            <td class="py-2 px-4">₱<?php echo number_format($charge['amount']); ?></td>
+                                        </tr>
+                                        <?php
+                                    endforeach;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                           <!-- Pagination -->
+                           <div class="flex justify-center mt-4 space-x-1">
+                                <?php if ($currentPage > 1): ?>
+                                    <a href="?page=<?php echo $currentPage - 1; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Prev</a>
+                                <?php endif; ?>
 
-                            foreach ($transactions as $index => $transaction):
-                            ?>
-                            <tr class="<?php echo $index % 2 == 0 ? 'bg-gray-50' : 'bg-white'; ?>">
-                                <td class="py-2 px-4"><?php echo $transaction['date']; ?></td>
-                                <td class="py-2 px-4"><?php echo $transaction['type']; ?></td>
-                                <td class="py-2 px-4">₱<?php echo number_format($transaction['amount']); ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <a href="?page=<?php echo $i; ?>" class="px-3 py-1 <?php echo $i == $currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'; ?> rounded-lg hover:bg-blue-500 hover:text-white"><?php echo $i; ?></a>
+                                <?php endfor; ?>
+
+                                <?php if ($currentPage < $totalPages): ?>
+                                    <a href="?page=<?php echo $currentPage + 1; ?>" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white">Next</a>
+                                <?php endif; ?>
+                            </div>
+                    </div>
                 </div>
-
             </div>
         </main>
     </div>
+
+    <script>
+    function filterTransactions(filterType) {
+        const rows = document.querySelectorAll('#transactionTableBody tr');
+        let hasVisibleRows = false; // Flag to check if any rows are visible
+        const noTransactionsMessage = document.getElementById('noTransactionsMessage');
+
+        rows.forEach(row => {
+            const transactionType = row.querySelector('td:nth-child(2)').textContent;
+
+            if (filterType === 'all') {
+                row.style.display = '';
+                hasVisibleRows = true; // At least one row is visible
+            } else if (filterType === 'payments' && transactionType === 'Payment') {
+                row.style.display = '';
+                hasVisibleRows = true; // At least one row is visible
+            } else if (filterType === 'charges' && transactionType === 'Charge') {
+                row.style.display = '';
+                hasVisibleRows = true; // At least one row is visible
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Show or hide the no transactions message based on visibility
+        if (!hasVisibleRows) {
+            noTransactionsMessage.textContent = `No transactions that are equal to the selected filter: ${filterType}.`;
+            noTransactionsMessage.style.display = 'block'; // Show the message
+        } else {
+            noTransactionsMessage.style.display = 'none'; // Hide the message
+        }
+    }
+    </script>
+
+
 </body>
 </html>

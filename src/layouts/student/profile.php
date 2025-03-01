@@ -63,7 +63,7 @@ foreach ($required_fields as $field) {
                 <?php if ($student): ?>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <p><strong class="font-medium">Name:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['first_name'] ?? '') . ' ' . htmlspecialchars($student['last_name'] ?? ''); ?></span></p>
-                        <p><strong class="font-medium">Student ID:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['user_id'] ?? ''); ?></span></p>
+                        <p><strong class="font-medium">Student ID:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['username'] ?? ''); ?></span></p>
                         <p><strong class="font-medium">Email:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['email'] ?? ''); ?></span></p>
                         <p><strong class="font-medium">Phone:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['phone_number'] ?? ''); ?></span></p>
                         <p><strong class="font-medium">Date of Birth:</strong> <span class="block sm:inline"><?php echo htmlspecialchars($student['date_of_birth'] ?? ''); ?></span></p>
