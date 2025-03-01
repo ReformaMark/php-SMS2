@@ -106,26 +106,35 @@ function getStudentFinancialTransactions(object $pdo, int $user_id, int $limit =
 function fetchStudents(object $pdo, ?string $filter, int $offset, int $limit, bool $isArchived) {
     try {
         $query = "SELECT * FROM users WHERE role = 'Student' AND is_archived = :is_archived";
+        $params = [':is_archived' => $isArchived];
+        
         if ($filter) {
-            $query .= " AND (first_name LIKE :filter OR last_name LIKE :filter OR email LIKE :filter)";
+            $query .= " AND (first_name LIKE :name_filter OR last_name LIKE :name_filter OR email LIKE :name_filter)";
+            $params[':name_filter'] = "%$filter%";
         }
-        $query .= " LIMIT :offset, :limit";
+
+        if (isset($_GET['course']) && !empty($_GET['course'])) {
+            $query .= " AND course = :course";
+            $params[':course'] = $_GET['course'];
+        }
+
+        $query .= " ORDER BY user_id DESC LIMIT :offset, :limit";
         
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":is_archived", $isArchived, PDO::PARAM_BOOL);
-        if ($filter) {
-            $filterParam = "%$filter%";
-            $stmt->bindParam(":filter", $filterParam, PDO::PARAM_STR);
+        
+        foreach ($params as $key => &$value) {
+            $stmt->bindParam($key, $value);
         }
-        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
-        $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+        
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        
         $stmt->execute();
-
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
     } catch (PDOException $e) {
         error_log("Database error in fetchStudents: " . $e->getMessage());
-        return null;
+        return [];
     }
 }
 
