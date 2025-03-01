@@ -6,6 +6,8 @@
             header("Location: ./src/layouts/dashboard.php");
         } elseif ($_SESSION['user_role'] === 'Student') {
             header("Location: ./src/layouts/student_dashboard.php");
+        } elseif ($_SESSION['user_role'] === "SuperAdmin") {
+            header("Location: ./src/layouts/super_admin_dashboard.php");
         }
         die();
     }

@@ -96,6 +96,24 @@ declare(strict_types=1);
         </a>';
     }
 
+    if(basename($_SERVER['PHP_SELF']) === 'employees.php'){
+        echo '
+        <a href="../layouts/employees.php" class="w-full flex items-center gap-x-3 bg-blue-500 translate-x-5 pl-5 rounded-l-full text-white transition-all duration-500 ease-linear font-normal text-lg border-b p-1">
+            <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm4.52 3.38c-.39-.27-.82-.48-1.27-.65.46-.16.89-.37 1.27-.65C17.48 15.45 20 16.23 20 18v2h2v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            Employees
+        </a>';
+    } else {
+        echo '
+        <a href="../layouts/employees.php" class="w-full flex items-center gap-x-3 pl-3 hover:bg-blue-500 hover:translate-x-5 hover:pl-5 hover:rounded-l-full hover:text-white transition-all duration-500 ease-linear font-normal text-lg border-b p-1">
+            <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm4.52 3.38c-.39-.27-.82-.48-1.27-.65.46-.16.89-.37 1.27-.65C17.48 15.45 20 16.23 20 18v2h2v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            Employees
+        </a>';
+    }
+
     //bi_reports
     // if(basename($_SERVER['PHP_SELF']) === 'bi_reports.php'){
     //     echo 

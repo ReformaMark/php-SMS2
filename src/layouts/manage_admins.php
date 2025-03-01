@@ -25,7 +25,9 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'SuperAdmin') {
         include('../../public/templates/header.php');
     ?>
     
-    <div class="flex h-screen pt-20">
+    <div 
+        style="display: flex; height: 100vh; padding-top: 70px;"
+    >
         <!-- Sidebar -->
         <?php include('../../public/templates/sidebar.php');?>
         

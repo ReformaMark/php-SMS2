@@ -39,7 +39,9 @@ $dashboardData = getDashboardStats($pdo);
         include('../../public/templates/header.php');
     ?>
     
-    <div class="flex flex-col lg:flex-row pt-20">
+    <div 
+        style="display: flex; height: 100vh; padding-top: 70px;"
+    >
         <!-- Sidebar -->
         <?php include('../../public/templates/sidebar.php'); ?>
 

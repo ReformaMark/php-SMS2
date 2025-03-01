@@ -3,9 +3,9 @@
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
     // Development environment (localhost)
     $host = "localhost";
-    $dbName = "sms-mis";  // Local database name
-    $dbUsername = "root";          // Local database username
-    $dbPassword = "";              // Local database password (usually empty for localhost)
+    $dbName = "sms-mis";
+    $dbUsername = "root";
+    $dbPassword = "";              
 } else {
     // Production environment
     $host = "localhost";
