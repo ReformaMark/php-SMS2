@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 
-include_once("src/connection/connection.php");
+include_once("src/connect/connection.php");
 require_once 'src/config_session.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
