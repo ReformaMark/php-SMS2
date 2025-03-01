@@ -11,7 +11,7 @@ function fetchTransactions (object $pdo, string $student_id){
 };
 
 
-function fetchPayments (object $pdo, string $student_id): array {
+function fetchPayments (object $pdo, string $student_id): array { 
     try{
         $payments = getPayments($pdo, $student_id); 
         return $payments;

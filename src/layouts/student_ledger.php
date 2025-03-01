@@ -13,7 +13,7 @@
     require_once '../Controllers/transaction_controller.php';
     require_once "../Views/transactions_view.php";
     require_once "../Views/ledger_view.php";
-    
+     
     $user_id = $_SESSION['user_id'];
     $student = getStudentInfo($pdo, $user_id);
     $transactions = fetchTransactions($pdo, $student['username']);

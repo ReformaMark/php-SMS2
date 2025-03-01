@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function getAllTransactions(object $pdo, string $student_id): ?array {
+function getAllTransactions(object $pdo, string $student_id): ?array { 
     try {
         $query = "SELECT * FROM financialtransactions WHERE student_id = :student_id ORDER BY date DESC;";
         $stmt = $pdo->prepare($query);
